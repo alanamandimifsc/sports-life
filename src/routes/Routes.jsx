@@ -4,6 +4,7 @@ import { Login } from "../pages/Login"
 import { RegisterPlace } from "../pages/RegisterPlace"
 import { RegisterUser } from "../pages/RegisterUser"
 import { PlaceList } from "../pages/PlaceList"
+import { DashBoard } from "../pages/DashBoard"
 
 
 export const Routes = createBrowserRouter([
@@ -26,6 +27,10 @@ export const Routes = createBrowserRouter([
             {
                 path: "/placeList",
                 element: <PlaceList />
+            },
+            {
+                path: "/dashboard",
+                element: <DashBoard />
             }
         ],
 
