@@ -23,7 +23,7 @@ export const Login = () => {
 
     return (
         <Grid container justifyContent="center" style={{ minHeight: '90vh', alignItems: 'center' }}>
-            <Grid item xs={12} sm={8} md={6} lg={4}>
+            <Grid item xs={12} sm={12} md={10} lg={8}>
                 <Paper elevation={3} style={{ padding: '30px' }}>
                     <Typography variant="h5" component="h1" align="center" gutterBottom>
                         Faça Login

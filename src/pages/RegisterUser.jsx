@@ -20,19 +20,19 @@ export const RegisterUser = () => {
 
     const onSubmit = data => {
         console.log({
-            Nome: data.Nome,
-            "E-mail": data["E-mail"],
-            CPF: data.CPF,
-            "Data de Nascimento": data["Data de Nascimento"],
-            Senha: data.Senha,
-            Sexo: data.Sexo,
-            CEP: data.CEP,
+            Nome: data.nome,
+            "E-mail": data["email"],
+            CPF: data.cpf,
+            "Data de Nascimento": data["data_nasc"],
+            Senha: data.senha,
+            Sexo: data.sexo,
+            CEP: data.cep,
             Rua: address.street,
             Bairro: address.neighborhood,
             Cidade: address.city,
             Estado: address.state,
-            Número: data.Número,
-            Complemento: data.Complemento
+            Número: data.numero,
+            Complemento: data.complemento
 
         });
     }
@@ -62,37 +62,37 @@ export const RegisterUser = () => {
             <Grid container spacing={3}>
                 <Grid item xs={6}>
                     <Paper style={{ padding: '20px' }}>
-                        <TextField fullWidth type="text" label="Nome" {...register("Nome", { required: true, maxLength: 100 })} />
+                        <TextField fullWidth type="text" label="Nome" {...register("nome", { required: true, maxLength: 100 })} />
                         {errors.Nome && <span style={{ color: 'red' }}>Por favor, insira um nome válido.</span>}
                     </Paper>
                 </Grid>
                 <Grid item xs={6}>
                     <Paper style={{ padding: '20px' }}>
-                        <TextField fullWidth type="email" label="E-mail" {...register("E-mail", { required: true })} />
+                        <TextField fullWidth type="email" label="E-mail" {...register("email", { required: true })} />
                         {errors["E-mail"] && <span style={{ color: 'red' }}>Por favor, insira um e-mail válido.</span>}
                     </Paper>
                 </Grid>
                 <Grid item xs={6}>
                     <Paper style={{ padding: '20px' }}>
-                        <TextField fullWidth type="text" label="CPF" {...register("CPF", { required: true, minLength: 11, maxLength: 11 })} />
+                        <TextField fullWidth type="text" label="CPF" {...register("cpf", { required: true, minLength: 11, maxLength: 11 })} />
                         {errors.CPF && <span style={{ color: 'red' }}>Por favor, insira um CPF válido.</span>}
                     </Paper>
                 </Grid>
                 <Grid item xs={6}>
                     <Paper style={{ padding: '20px' }}>
-                        <TextField fullWidth type="date" label="Data de Nascimento" {...register("Data de Nascimento", { required: true })} InputLabelProps={{ shrink: true }} />
+                        <TextField fullWidth type="date" label="Data de Nascimento" {...register("data_nasc", { required: true })} InputLabelProps={{ shrink: true }} />
                         {errors["Data de Nascimento"] && <span style={{ color: 'red' }}>Por favor, insira uma data de nascimento válida.</span>}
                     </Paper>
                 </Grid>
                 <Grid item xs={6}>
                     <Paper style={{ padding: '20px' }}>
-                        <TextField fullWidth type="password" label="Senha" {...register("Senha", { required: true })} />
+                        <TextField fullWidth type="password" label="Senha" {...register("senha", { required: true })} />
                         {errors.Senha && <span style={{ color: 'red' }}>Por favor, insira uma senha válida.</span>}
                     </Paper>
                 </Grid>
                 <Grid item xs={6}>
                     <Paper style={{ padding: '20px' }}>
-                        <Select fullWidth label="Sexo" {...register("Sexo", { required: true })} defaultValue="">
+                        <Select fullWidth label="Sexo" {...register("sexo", { required: true })} defaultValue="">
                             <MenuItem value="" disabled>Selecione o gênero</MenuItem>
                             <MenuItem value="Feminino">Feminino</MenuItem>
                             <MenuItem value="Masculino">Masculino</MenuItem>
@@ -102,39 +102,39 @@ export const RegisterUser = () => {
                 </Grid>
                 <Grid item xs={6}>
                     <Paper style={{ padding: '20px' }}>
-                        <TextField fullWidth type="text" label="CEP" {...register("CEP", { required: true })} onBlur={handleBlurCEP} />
+                        <TextField fullWidth type="text" label="CEP" {...register("cep", { required: true })} onBlur={handleBlurCEP} />
                         {errors.CEP && <span style={{ color: 'red' }}>Por favor, insira um CEP válido.</span>}
                     </Paper>
                 </Grid>
                 <Grid item xs={6}>
                     <Paper style={{ padding: '20px' }}>
-                        <TextField fullWidth type="text" label="Rua" value={address.street} {...register("Rua", { required: true })} />
+                        <TextField fullWidth type="text" label="Rua" value={address.street} {...register("rua", { required: true })} />
                     </Paper>
                 </Grid>
                 <Grid item xs={3}>
                     <Paper style={{ padding: '20px' }}>
-                        <TextField fullWidth type="text" label="Bairro" value={address.neighborhood} {...register("Bairro")} />
+                        <TextField fullWidth type="text" label="Bairro" value={address.neighborhood} {...register("bairro")} />
                     </Paper>
                 </Grid>
                 <Grid item xs={3}>
                     <Paper style={{ padding: '20px' }}>
-                        <TextField fullWidth type="text" label="Cidade" value={address.city} {...register("Cidade")} />
+                        <TextField fullWidth type="text" label="Cidade" value={address.city} {...register("cidade")} />
                     </Paper>
                 </Grid>
                 <Grid item xs={6}>
                     <Paper style={{ padding: '20px' }}>
-                        <TextField fullWidth type="text" label="Estado" value={address.state} {...register("Estado")} />
+                        <TextField fullWidth type="text" label="Estado" value={address.state} {...register("estado")} />
                     </Paper>
                 </Grid>
                 <Grid item xs={3}>
                     <Paper style={{ padding: '20px' }}>
-                        <TextField fullWidth type="number" label="Número" {...register("Número", { required: true, maxLength: 5 })} />
+                        <TextField fullWidth type="number" label="Número" {...register("numero", { required: true, maxLength: 5 })} />
                         {errors.Número && <span style={{ color: 'red' }}>Por favor, insira um número válido.</span>}
                     </Paper>
                 </Grid>
                 <Grid item xs={3}>
                     <Paper style={{ padding: '20px' }}>
-                        <TextField fullWidth type="text" label="Complemento" {...register("Complemento", { required: true })} />
+                        <TextField fullWidth type="text" label="Complemento" {...register("complemento", { required: true })} />
                         {errors.Complemento && <span style={{ color: 'red' }}>Por favor, insira um complemento válido.</span>}
                     </Paper>
                 </Grid>
