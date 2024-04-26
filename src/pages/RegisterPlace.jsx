@@ -13,7 +13,9 @@ export const RegisterPlace = () => {
         street: '',
         neighborhood: '',
         city: '',
-        state: ''
+        state: '',
+        latitude: '',
+        longitude: ''
     });
 
     const handleBlurCEP = async (event) => {
@@ -26,7 +28,9 @@ export const RegisterPlace = () => {
                     street: data.logradouro || '',
                     neighborhood: data.bairro || '',
                     city: data.localidade || '',
-                    state: data.uf || ''
+                    state: data.uf || '',
+                    latitude: data.latitude || '',
+                    longitude: data.longitude || ''
                 });
             } catch (error) {
                 console.log("Erro ao buscar CEP:", error);
@@ -36,16 +40,18 @@ export const RegisterPlace = () => {
 
     const onSubmit = (data) => {
         console.log({
-            Nome: data.Nome,
-            "ID do usuário": data["ID do usuário"],
-            Descrição: data.Descrição,
-            PráticasEsportivas: data.PráticasEsportivas,
-            Rua: data.Rua,
+            Nome: data.nome,
+            "ID do usuário": data.id,
+            Descrição: data.descricao,
+            PráticasEsportivas: data.praticas_esportivas,
+            Rua: data.rua,
             Bairro: address.neighborhood,
             Cidade: address.city,
             Estado: address.state,
-            Número: data.Número,
-            Complemento: data.Complemento
+            Número: data.numero,
+            Complemento: data.complemento,
+            Latitude: data.latitude,
+            Longitude: data.longitude
         });
     };
 
@@ -61,9 +67,9 @@ export const RegisterPlace = () => {
                             fullWidth
                             type="text"
                             label="Nome"
-                            {...register("Nome", { required: true })}
-                            error={!!errors.Nome}
-                            helperText={errors.Nome ? "Campo obrigatório" : ""}
+                            {...register("nome", { required: true })}
+                            error={!!errors.nome}
+                            helperText={errors.nome ? "Campo obrigatório" : ""}
                         />
                     </Grid>
                     <Grid item xs={12} md={6}>
@@ -71,9 +77,9 @@ export const RegisterPlace = () => {
                             fullWidth
                             type="number"
                             label="ID do usuário"
-                            {...register("ID do usuário", { required: true, min: 1 })}
-                            error={!!errors["ID do usuário"]}
-                            helperText={errors["ID do usuário"] ? "ID inválido" : ""}
+                            {...register("id", { required: true, min: 1 })}
+                            error={!!errors.id}
+                            helperText={errors.id ? "ID inválido" : ""}
                         />
                     </Grid>
                     <Grid item xs={12}>
@@ -81,9 +87,9 @@ export const RegisterPlace = () => {
                             fullWidth
                             type="text"
                             label="Descrição"
-                            {...register("Descrição", { required: true })}
-                            error={!!errors.Descrição}
-                            helperText={errors.Descrição ? "Campo obrigatório" : ""}
+                            {...register("descricao", { required: true })}
+                            error={!!errors.descricao}
+                            helperText={errors.descricao ? "Campo obrigatório" : ""}
                         />
                     </Grid>
                     <Grid item xs={12}>
@@ -92,24 +98,24 @@ export const RegisterPlace = () => {
                             <Grid container spacing={1}>
                                 <Grid item xs={6}>
                                     <div>
-                                        <input type="checkbox" id="caminhada" {...register("PráticasEsportivas", { required: true })} value="caminhada" />
+                                        <input type="checkbox" id="caminhada" {...register("praticas_esportivas", { required: true })} value="caminhada" />
                                         <label htmlFor="caminhada">Caminhada</label><br />
-                                        <input type="checkbox" id="trilha" {...register("PráticasEsportivas", { required: true })} value="trilha" />
+                                        <input type="checkbox" id="trilha" {...register("praticas_esportivas", { required: true })} value="trilha" />
                                         <label htmlFor="trilha">Trilha</label><br />
-                                        <input type="checkbox" id="musculação" {...register("PráticasEsportivas", { required: true })} value="musculação" />
+                                        <input type="checkbox" id="musculação" {...register("praticas_esportivas", { required: true })} value="musculação" />
                                         <label htmlFor="musculação">Musculação</label><br />
                                     </div>
                                 </Grid>
                                 <Grid item xs={6}>
                                     <div>
-                                        <input type="checkbox" id="natação" {...register("PráticasEsportivas", { required: true })} value="natação" />
+                                        <input type="checkbox" id="natação" {...register("praticas_esportivas", { required: true })} value="natação" />
                                         <label htmlFor="natação">Natação</label><br />
-                                        <input type="checkbox" id="surf" {...register("PráticasEsportivas", { required: true })} value="surf" />
+                                        <input type="checkbox" id="surf" {...register("praticas_esportivas", { required: true })} value="surf" />
                                         <label htmlFor="surf">Surf</label><br />
                                     </div>
                                 </Grid>
                             </Grid>
-                            {errors["PráticasEsportivas"] && <span style={{ color: 'red' }}>Selecione pelo menos uma prática esportiva</span>}
+                            {errors.praticas_esportivas && <span style={{ color: 'red' }}>Selecione pelo menos uma prática esportiva</span>}
                         </fieldset>
                     </Grid>
                     <Grid item xs={12} sm={6}>
@@ -127,10 +133,10 @@ export const RegisterPlace = () => {
                             fullWidth
                             type="text"
                             label="Rua"
-                            {...register("Rua")}
+                            {...register("rua")}
                             value={address.street}
-                            error={!!errors.Rua}
-                            helperText={errors.Rua ? "Campo obrigatório" : ""}
+                            error={!!errors.rua}
+                            helperText={errors.rua ? "Campo obrigatório" : ""}
                         />
                     </Grid>
                     <Grid item xs={12} sm={6}>
@@ -138,9 +144,9 @@ export const RegisterPlace = () => {
                             fullWidth
                             type="number"
                             label="Número"
-                            {...register("Número", { required: true, maxLength: 5 })}
-                            error={!!errors.Número}
-                            helperText={errors.Número ? "Número inválido" : ""}
+                            {...register("numero", { required: true, maxLength: 5 })}
+                            error={!!errors.numero}
+                            helperText={errors.numero ? "Número inválido" : ""}
                         />
                     </Grid>
                     <Grid item xs={12} sm={6}>
@@ -148,9 +154,9 @@ export const RegisterPlace = () => {
                             fullWidth
                             type="text"
                             label="Complemento"
-                            {...register("Complemento", { required: true })}
-                            error={!!errors.Complemento}
-                            helperText={errors.Complemento ? "Campo obrigatório" : ""}
+                            {...register("complemento", { required: true })}
+                            error={!!errors.complemento}
+                            helperText={errors.complemento ? "Campo obrigatório" : ""}
                         />
                     </Grid>
                     <Grid item xs={12} sm={6}>
@@ -158,10 +164,10 @@ export const RegisterPlace = () => {
                             fullWidth
                             type="text"
                             label="Bairro"
-                            {...register("Bairro")}
+                            {...register("bairro")}
                             value={address.neighborhood}
-                            error={!!errors.Bairro}
-                            helperText={errors.Bairro ? "Campo obrigatório" : ""}
+                            error={!!errors.bairro}
+                            helperText={errors.bairro ? "Campo obrigatório" : ""}
                         />
                     </Grid>
                     <Grid item xs={12} sm={6}>
@@ -169,10 +175,10 @@ export const RegisterPlace = () => {
                             fullWidth
                             type="text"
                             label="Cidade"
-                            {...register("Cidade")}
+                            {...register("cidade")}
                             value={address.city}
-                            error={!!errors.Cidade}
-                            helperText={errors.Cidade ? "Campo obrigatório" : ""}
+                            error={!!errors.cidade}
+                            helperText={errors.cidade ? "Campo obrigatório" : ""}
                         />
                     </Grid>
                     <Grid item xs={12} sm={6}>
@@ -180,10 +186,30 @@ export const RegisterPlace = () => {
                             fullWidth
                             type="text"
                             label="Estado"
-                            {...register("Estado")}
+                            {...register("estado")}
                             value={address.state}
-                            error={!!errors.Estado}
-                            helperText={errors.Estado ? "Campo obrigatório" : ""}
+                            error={!!errors.estado}
+                            helperText={errors.estado ? "Campo obrigatório" : ""}
+                        />
+                    </Grid>
+                    <Grid item xs={12} sm={6}>
+                        <TextField
+                            fullWidth
+                            type="text"
+                            label="Latitude"
+                            {...register("latitude", { required: true })}
+                            error={!!errors.latitude}
+                            helperText={errors.latitude ? "Campo obrigatório" : ""}
+                        />
+                    </Grid>
+                    <Grid item xs={12} sm={6}>
+                        <TextField
+                            fullWidth
+                            type="text"
+                            label="Longitude"
+                            {...register("longitude", { required: true })}
+                            error={!!errors.longitude}
+                            helperText={errors.longitude ? "Campo obrigatório" : ""}
                         />
                     </Grid>
                     <Grid item xs={12}>
