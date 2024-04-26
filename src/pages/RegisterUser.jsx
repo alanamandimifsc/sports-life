@@ -8,6 +8,7 @@ import MenuItem from '@mui/material/MenuItem';
 import Button from '@mui/material/Button';
 import axios from 'axios';
 
+
 export const RegisterUser = () => {
     const { register, handleSubmit, formState: { errors } } = useForm();
     const [address, setAddress] = useState({
@@ -17,7 +18,24 @@ export const RegisterUser = () => {
         state: ''
     });
 
-    const onSubmit = data => console.log(data);
+    const onSubmit = data => {
+        console.log({
+            Nome: data.Nome,
+            "E-mail": data["E-mail"],
+            CPF: data.CPF,
+            "Data de Nascimento": data["Data de Nascimento"],
+            Senha: data.Senha,
+            Sexo: data.Sexo,
+            CEP: data.CEP,
+            Rua: address.street,
+            Bairro: address.neighborhood,
+            Cidade: address.city,
+            Estado: address.state,
+            Número: data.Número,
+            Complemento: data.Complemento
+
+        });
+    }
     console.log(errors);
 
     const handleBlurCEP = (event) => {
@@ -45,11 +63,13 @@ export const RegisterUser = () => {
                 <Grid item xs={6}>
                     <Paper style={{ padding: '20px' }}>
                         <TextField fullWidth type="text" label="Nome" {...register("Nome", { required: true, maxLength: 100 })} />
+                        {errors.Nome && <span style={{ color: 'red' }}>Por favor, insira um nome válido.</span>}
                     </Paper>
                 </Grid>
                 <Grid item xs={6}>
                     <Paper style={{ padding: '20px' }}>
                         <TextField fullWidth type="email" label="E-mail" {...register("E-mail", { required: true })} />
+                        {errors["E-mail"] && <span style={{ color: 'red' }}>Por favor, insira um e-mail válido.</span>}
                     </Paper>
                 </Grid>
                 <Grid item xs={6}>
@@ -61,11 +81,13 @@ export const RegisterUser = () => {
                 <Grid item xs={6}>
                     <Paper style={{ padding: '20px' }}>
                         <TextField fullWidth type="date" label="Data de Nascimento" {...register("Data de Nascimento", { required: true })} InputLabelProps={{ shrink: true }} />
+                        {errors["Data de Nascimento"] && <span style={{ color: 'red' }}>Por favor, insira uma data de nascimento válida.</span>}
                     </Paper>
                 </Grid>
                 <Grid item xs={6}>
                     <Paper style={{ padding: '20px' }}>
                         <TextField fullWidth type="password" label="Senha" {...register("Senha", { required: true })} />
+                        {errors.Senha && <span style={{ color: 'red' }}>Por favor, insira uma senha válida.</span>}
                     </Paper>
                 </Grid>
                 <Grid item xs={6}>
@@ -81,6 +103,7 @@ export const RegisterUser = () => {
                 <Grid item xs={6}>
                     <Paper style={{ padding: '20px' }}>
                         <TextField fullWidth type="text" label="CEP" {...register("CEP", { required: true })} onBlur={handleBlurCEP} />
+                        {errors.CEP && <span style={{ color: 'red' }}>Por favor, insira um CEP válido.</span>}
                     </Paper>
                 </Grid>
                 <Grid item xs={6}>
@@ -106,15 +129,17 @@ export const RegisterUser = () => {
                 <Grid item xs={3}>
                     <Paper style={{ padding: '20px' }}>
                         <TextField fullWidth type="number" label="Número" {...register("Número", { required: true, maxLength: 5 })} />
+                        {errors.Número && <span style={{ color: 'red' }}>Por favor, insira um número válido.</span>}
                     </Paper>
                 </Grid>
                 <Grid item xs={3}>
                     <Paper style={{ padding: '20px' }}>
-                        <TextField fullWidth type="text" label="Complemento" {...register("Complemento")} />
+                        <TextField fullWidth type="text" label="Complemento" {...register("Complemento", { required: true })} />
+                        {errors.Complemento && <span style={{ color: 'red' }}>Por favor, insira um complemento válido.</span>}
                     </Paper>
                 </Grid>
                 <Grid item xs={12}>
-                    <Button type="submit" variant="contained" color="primary">Submit</Button>
+                    <Button type="submit" variant="contained" color="primary">Cadastrar</Button>
                 </Grid>
             </Grid>
         </form>
