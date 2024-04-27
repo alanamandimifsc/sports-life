@@ -31,6 +31,10 @@ export const Routes = createBrowserRouter([
             {
                 path: "/dashboard",
                 element: <DashBoard />
+            },
+            {
+                path: "/registerPlace/:id",
+                element: <RegisterPlace />
             }
         ],
 

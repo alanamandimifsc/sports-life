@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
@@ -6,16 +6,78 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import axios from 'axios';
+import { useParams } from 'react-router-dom';
 
 export const RegisterPlace = () => {
-    const { register, handleSubmit, formState: { errors } } = useForm();
+
+    const { id } = useParams();
+    // const history = useHistory();
+
+    const { register, handleSubmit, formState: { errors }, setValue } = useForm();
+
+    const [place, setPlaceData] = useState({
+        nome: '',
+        id_usuario: '',
+        descricao: '',
+        praticas_esportivas: [],
+        rua: '',
+        numero: '',
+        complemento: '',
+        bairro: '',
+        cidade: '',
+        estado: '',
+        latitude: '',
+        longitude: '',
+        cep: ''
+    });
+
+    useEffect(() => {
+        const fetchPlaceData = async () => {
+            if (id) {
+                try {
+                    const response = await axios.get(`http://localhost:3000/lugares`);
+                    const place = response.data.find(place => place.id === parseInt(id));
+
+                    // Verificar se o lugar foi encontrado
+                    if (place) {
+                        console.log(place.cep)
+                        console.log(place.latitude)
+                        setValue('nome', place.nome);
+                        setValue('id', place.id_usuario);
+                        setValue('descricao', place.descricao);
+                        setValue('praticas_esportivas', place.praticas_esportivas);
+                        setValue('rua', place.rua);
+                        // setValue('cep'.place.cep)
+                        setValue('numero', place.numero);
+                        setValue('complemento', place.complemento);
+                        setValue('bairro', place.bairro);
+                        setValue('cidade', place.cidade);
+                        setValue('estado', place.estado);
+                        setValue('latitude', place.latitude);
+                        setValue('longitude', place.longitude);
+                        setAddress({
+                            street: place.rua || '',
+                            neighborhood: place.bairro || '',
+                            city: place.cidade || '',
+                            state: place.estado || '',
+                            cep: place.cep
+                        });
+                    } else {
+                        console.log(`Lugar com ID ${id} não encontrado.`);
+                    }
+                } catch (error) {
+                    console.log("Erro ao buscar lugares:", error);
+                }
+            }
+        };
+        fetchPlaceData();
+    }, [id]);
+
     const [address, setAddress] = useState({
         street: '',
         neighborhood: '',
         city: '',
-        state: '',
-        latitude: '',
-        longitude: ''
+        state: ''
     });
 
     const handleBlurCEP = async (event) => {
@@ -28,9 +90,7 @@ export const RegisterPlace = () => {
                     street: data.logradouro || '',
                     neighborhood: data.bairro || '',
                     city: data.localidade || '',
-                    state: data.uf || '',
-                    latitude: data.latitude || '',
-                    longitude: data.longitude || ''
+                    cep: cep || ''
                 });
             } catch (error) {
                 console.log("Erro ao buscar CEP:", error);
