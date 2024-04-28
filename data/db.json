@@ -1,104 +1,140 @@
 {
-    "usuarios": [
-        {
-            "id": 1,
-            "nome": "Esther Gabrielly Hadassa Pires",
-            "email": "esther_pires@paae.com.br",
-            "cpf": "86103918766",
-            "data_nasc": "12/01/2004",
-            "sexo": "Feminino",
-            "senha": "JrMLyuSUHW",
-            "cep": "21815520",
-            "rua": "Rua Afrodite",
-            "numero": 748,
-            "bairro": "Bangu",
-            "cidade": "Rio de Janeiro",
-            "estado": "RJ",
-            "logado": "false"
-        },
-        {
-            "id": 2,
-            "nome": "Pietra Ester Drumond",
-            "email": "pietraesterdrumond@life.com",
-            "cpf": "29021510715",
-            "data_nasc": "16/01/2004",
-            "sexo": "Feminino",
-            "senha": "dlAObwrs04",
-            "cep": "21012377",
-            "rua": "Rua Cinquenta e Um",
-            "numero": 766,
-            "bairro": "Braz de Pina",
-            "cidade": "Rio de Janeiro",
-            "estado": "RJ",
-            "logado": "false"
-        },
-        {
-            "id": 3,
-            "nome": "Sara Regina Novaes",
-            "email": "sarareginanovaes@findout.com.br",
-            "cpf": "62509398903",
-            "data_nasc": "20/04/1995",
-            "sexo": "Feminino",
-            "senha": "KOri4JOHUD",
-            "cep": "88052810",
-            "rua": "Rua Francisco Fausto Martins",
-            "numero": 959,
-            "bairro": "Vargem Grande",
-            "cidade": "Florianópolis",
-            "estado": "SC",
-            "logado": "false"
-        },
-        {
-            "id": 4,
-            "nome": "Lúcia Helena Rosa Nogueira",
-            "email": "lucia.helena.nogueira@plani.com.br",
-            "cpf": "83514884960",
-            "data_nasc": "19/04/1995",
-            "sexo": "Feminino",
-            "senha": "wcFiHoUX1A",
-            "cep": "89203040",
-            "rua": "Rua Oscar A Schneider",
-            "numero": 589,
-            "bairro": "Atiradores",
-            "cidade": "Joinville",
-            "estado": "SC",
-            "logado": "false"
-        },
-        {
-            "id": 5,
-            "nome": "Eloá Antonella Luana Pinto",
-            "email": "eloa.antonella.pinto@live.com",
-            "cpf": "06968925966",
-            "data_nasc": "14/01/1995",
-            "sexo": "Feminino",
-            "senha": "l4mf60AYXu",
-            "cep": "89201970",
-            "rua": "Rua Princesa Izabel 394",
-            "numero": 742,
-            "bairro": "Centro",
-            "cidade": "Joinville",
-            "estado": "SC",
-            "logado": "false"
-        }
-    ],
-    "lugares": [
-        {
-            "id": 1,
-            "id_usuario": 1,
-            "nome": "Praça da Bandeira",
-            "descricao": "Praça da Bandeira é um bairro da Zona Central do município do Rio de Janeiro, no Brasil. O bairro é cortado pela Rua Mariz e Barros, uma das principais vias de acesso ao Centro do Rio de Janeiro. O bairro é conhecido por abrigar o Estádio de São Januário, sede do Club de Regatas Vasco da Gama, e o Hospital Universitário Gaffrée e Guinle, da Universidade Federal do Estado do Rio de Janeiro.",
-            "cep": "20270-000",
-            "rua": "Rua Barão de Iguatemi",
-            "numero": 35,
-            "complemento": "Casa 1",
-            "bairro": "Praça da Bandeira",
-            "cidade": "Rio de Janeiro",
-            "estado": "RJ",
-            "latitude": "-22.9203",
-            "longitude": "-43.1917",
-            "praticas_esportivas": [
-                "caminhada"
-            ]
-        }
-    ]
+  "usuarios": [
+    {
+      "id": 1,
+      "nome": "Esther Gabrielly Hadassa Pires",
+      "email": "esther_pires@paae.com.br",
+      "cpf": "86103918766",
+      "data_nasc": "12/01/2004",
+      "sexo": "Feminino",
+      "senha": "JrMLyuSUHW",
+      "cep": "21815520",
+      "rua": "Rua Afrodite",
+      "numero": 748,
+      "bairro": "Bangu",
+      "cidade": "Rio de Janeiro",
+      "estado": "RJ",
+      "logado": "false"
+    },
+    {
+      "id": 2,
+      "nome": "Pietra Ester Drumond",
+      "email": "pietraesterdrumond@life.com",
+      "cpf": "29021510715",
+      "data_nasc": "16/01/2004",
+      "sexo": "Feminino",
+      "senha": "dlAObwrs04",
+      "cep": "21012377",
+      "rua": "Rua Cinquenta e Um",
+      "numero": 766,
+      "bairro": "Braz de Pina",
+      "cidade": "Rio de Janeiro",
+      "estado": "RJ",
+      "logado": "false"
+    },
+    {
+      "id": 3,
+      "nome": "Sara Regina Novaes",
+      "email": "sarareginanovaes@findout.com.br",
+      "cpf": "62509398903",
+      "data_nasc": "20/04/1995",
+      "sexo": "Feminino",
+      "senha": "KOri4JOHUD",
+      "cep": "88052810",
+      "rua": "Rua Francisco Fausto Martins",
+      "numero": 959,
+      "bairro": "Vargem Grande",
+      "cidade": "Florianópolis",
+      "estado": "SC",
+      "logado": "false"
+    },
+    {
+      "id": 4,
+      "nome": "Lúcia Helena Rosa Nogueira",
+      "email": "lucia.helena.nogueira@plani.com.br",
+      "cpf": "83514884960",
+      "data_nasc": "19/04/1995",
+      "sexo": "Feminino",
+      "senha": "wcFiHoUX1A",
+      "cep": "89203040",
+      "rua": "Rua Oscar A Schneider",
+      "numero": 589,
+      "bairro": "Atiradores",
+      "cidade": "Joinville",
+      "estado": "SC",
+      "logado": "false"
+    },
+    {
+      "id": 5,
+      "nome": "Eloá Antonella Luana Pinto",
+      "email": "eloa.antonella.pinto@live.com",
+      "cpf": "06968925966",
+      "data_nasc": "14/01/1995",
+      "sexo": "Feminino",
+      "senha": "l4mf60AYXu",
+      "cep": "89201970",
+      "rua": "Rua Princesa Izabel 394",
+      "numero": 742,
+      "bairro": "Centro",
+      "cidade": "Joinville",
+      "estado": "SC",
+      "logado": "false"
+    }
+  ],
+  "lugares": [
+    {
+      "id": 1,
+      "id_usuario": 1,
+      "nome": "Praça da Bandeira",
+      "descricao": "Praça da Bandeira é um bairro da Zona Central do município do Rio de Janeiro, no Brasil. O bairro é cortado pela Rua Mariz e Barros, uma das principais vias de acesso ao Centro do Rio de Janeiro. O bairro é conhecido por abrigar o Estádio de São Januário, sede do Club de Regatas Vasco da Gama, e o Hospital Universitário Gaffrée e Guinle, da Universidade Federal do Estado do Rio de Janeiro.",
+      "cep": "20270-000",
+      "rua": "Rua Barão de Iguatemi",
+      "numero": 35,
+      "complemento": "Casa 1",
+      "bairro": "Praça da Bandeira",
+      "cidade": "Rio de Janeiro",
+      "estado": "RJ",
+      "latitude": "-22.9203",
+      "longitude": "-43.1917",
+      "praticas_esportivas": [
+        "caminhada"
+      ]
+    },
+    {
+      "id": 2,
+      "id_usuario": 3,
+      "nome": "alana mandim",
+      "descricao": "Teste",
+      "cep": "88049015",
+      "rua": "Avenida Blumenau",
+      "numero": 2055,
+      "complemento": "2055",
+      "bairro": "Tapera",
+      "cidade": "Florianópolis",
+      "estado": "SC",
+      "latitude": "-27.601380",
+      "longitude": "-48.501201",
+      "praticas_esportivas": [
+        "surf"
+      ]
+    },
+    {
+      "id": 3,
+      "id_usuario": 3,
+      "nome": "alana mandim",
+      "descricao": "Teste",
+      "cep": "88049015",
+      "rua": "Avenida Blumenau",
+      "numero": 2055,
+      "complemento": "2055",
+      "bairro": "Tapera",
+      "cidade": "Florianópolis",
+      "estado": "SC",
+      "latitude": "-27.601380",
+      "longitude": "-48.501201",
+      "praticas_esportivas": [
+        "surf"
+      ]
+    }
+  ]
 }
