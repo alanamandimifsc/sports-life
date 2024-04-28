@@ -1,7 +1,7 @@
 {
   "usuarios": [
     {
-      "id": 1,
+      "id": "1",
       "nome": "Esther Gabrielly Hadassa Pires",
       "email": "esther_pires@paae.com.br",
       "cpf": "86103918766",
@@ -17,7 +17,7 @@
       "logado": "false"
     },
     {
-      "id": 2,
+      "id": "2",
       "nome": "Pietra Ester Drumond",
       "email": "pietraesterdrumond@life.com",
       "cpf": "29021510715",
@@ -33,7 +33,7 @@
       "logado": "false"
     },
     {
-      "id": 3,
+      "id": "3",
       "nome": "Sara Regina Novaes",
       "email": "sarareginanovaes@findout.com.br",
       "cpf": "62509398903",
@@ -49,7 +49,7 @@
       "logado": "false"
     },
     {
-      "id": 4,
+      "id": "4",
       "nome": "Lúcia Helena Rosa Nogueira",
       "email": "lucia.helena.nogueira@plani.com.br",
       "cpf": "83514884960",
@@ -65,7 +65,7 @@
       "logado": "false"
     },
     {
-      "id": 5,
+      "id": "5",
       "nome": "Eloá Antonella Luana Pinto",
       "email": "eloa.antonella.pinto@live.com",
       "cpf": "06968925966",
@@ -83,7 +83,7 @@
   ],
   "lugares": [
     {
-      "id": 1,
+      "id": "1",
       "id_usuario": 1,
       "nome": "Praça da Bandeira",
       "descricao": "Praça da Bandeira é um bairro da Zona Central do município do Rio de Janeiro, no Brasil. O bairro é cortado pela Rua Mariz e Barros, uma das principais vias de acesso ao Centro do Rio de Janeiro. O bairro é conhecido por abrigar o Estádio de São Januário, sede do Club de Regatas Vasco da Gama, e o Hospital Universitário Gaffrée e Guinle, da Universidade Federal do Estado do Rio de Janeiro.",
@@ -102,38 +102,20 @@
     },
     {
       "id": 2,
-      "id_usuario": 3,
-      "nome": "alana mandim",
-      "descricao": "Teste",
+      "id_usuario": 4,
+      "nome": "alana",
+      "descricao": "cadastra 2",
       "cep": "88049015",
       "rua": "Avenida Blumenau",
       "numero": 2055,
-      "complemento": "2055",
+      "complemento": "s/",
       "bairro": "Tapera",
       "cidade": "Florianópolis",
       "estado": "SC",
       "latitude": "-27.601380",
       "longitude": "-48.501201",
       "praticas_esportivas": [
-        "surf"
-      ]
-    },
-    {
-      "id": 3,
-      "id_usuario": 3,
-      "nome": "alana mandim",
-      "descricao": "Teste",
-      "cep": "88049015",
-      "rua": "Avenida Blumenau",
-      "numero": 2055,
-      "complemento": "2055",
-      "bairro": "Tapera",
-      "cidade": "Florianópolis",
-      "estado": "SC",
-      "latitude": "-27.601380",
-      "longitude": "-48.501201",
-      "praticas_esportivas": [
-        "surf"
+        "caminhada"
       ]
     }
   ]

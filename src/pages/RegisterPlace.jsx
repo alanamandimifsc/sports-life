@@ -105,9 +105,8 @@ export const RegisterPlace = () => {
     };
 
     const onSubmit = (data) => {
-
-        fetch('http://localhost:3000/lugares', {
-            method: 'POST',
+        const requestConfig = {
+            method: id ? 'PUT' : 'POST',
             body: JSON.stringify({
                 id: (id !== undefined ? parseInt(id) : id_place),
                 id_usuario: parseInt(data.id_usuario),
@@ -127,16 +126,24 @@ export const RegisterPlace = () => {
             headers: {
                 'Content-Type': 'application/json'
             },
+        };
+        console.log(`http://localhost:3000/lugares${id ? `/${id}` : ''}`, requestConfig);
 
-        })
-            .then(() => {
-                setIdPlace(prevId => prevId + 1);
-                alert('Local cadastrado com sucesso!');
+        fetch(`http://localhost:3000/lugares${id ? `/${id}` : ''}`, requestConfig)
+            .then(response => {
+                console.log(response);
+                if (response.ok) {
+                    setIdPlace(prevId => prevId + 1);
+                    alert('Local cadastrado com sucesso!');
+                } else {
+                    throw new Error('Erro ao cadastrar local.');
+                }
             })
             .catch(error => {
                 console.error("Erro ao cadastrar local:", error);
                 alert('Erro ao cadastrar local!');
             });
+
 
 
         console.log({
