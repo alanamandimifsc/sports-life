@@ -81,42 +81,5 @@
       "logado": "false"
     }
   ],
-  "lugares": [
-    {
-      "id": "1",
-      "id_usuario": 1,
-      "nome": "Praça da Bandeira",
-      "descricao": "Praça da Bandeira é um bairro da Zona Central do município do Rio de Janeiro, no Brasil. O bairro é cortado pela Rua Mariz e Barros, uma das principais vias de acesso ao Centro do Rio de Janeiro. O bairro é conhecido por abrigar o Estádio de São Januário, sede do Club de Regatas Vasco da Gama, e o Hospital Universitário Gaffrée e Guinle, da Universidade Federal do Estado do Rio de Janeiro.",
-      "cep": "20270-000",
-      "rua": "Rua Barão de Iguatemi",
-      "numero": 35,
-      "complemento": "Casa 1",
-      "bairro": "Praça da Bandeira",
-      "cidade": "Rio de Janeiro",
-      "estado": "RJ",
-      "latitude": "-22.9203",
-      "longitude": "-43.1917",
-      "praticas_esportivas": [
-        "caminhada"
-      ]
-    },
-    {
-      "id": 2,
-      "id_usuario": 4,
-      "nome": "alana",
-      "descricao": "cadastra 2",
-      "cep": "88049015",
-      "rua": "Avenida Blumenau",
-      "numero": 2055,
-      "complemento": "s/",
-      "bairro": "Tapera",
-      "cidade": "Florianópolis",
-      "estado": "SC",
-      "latitude": "-27.601380",
-      "longitude": "-48.501201",
-      "praticas_esportivas": [
-        "caminhada"
-      ]
-    }
-  ]
+  "lugares": []
 }

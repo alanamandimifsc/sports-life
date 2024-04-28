@@ -11,7 +11,7 @@ import { useParams } from 'react-router-dom';
 export const RegisterPlace = () => {
 
     const { id } = useParams();
-    const [id_place, setIdPlace] = useState(2);
+    const [id_place, setIdPlace] = useState([1]);
 
     // const history = useHistory();
 
@@ -37,12 +37,13 @@ export const RegisterPlace = () => {
         const fetchPlaceData = async () => {
             if (id) {
                 try {
-                    const response = await axios.get(`http://localhost:3000/lugares`);
-                    // const response1 = await axios.put("http://localhost:3000/lugares/" + id);
-                    console.log(response.data);
+                    // const response = await axios.get(`http://localhost:3000/lugares`);
+                    const response = await axios.get("http://localhost:3000/lugares/" + id);
+                    // console.log(response.data);
                     // console.log(response1.data);
-                    console.log(id);
-                    const place = response.data.find(place => place.id === parseInt(id));
+                    // console.log(id);
+                    const place = response.data;
+                    // const place = response.data.find(place => place.id == id);
 
                     // Verificar se o lugar foi encontrado
                     if (place) {
@@ -108,7 +109,7 @@ export const RegisterPlace = () => {
         const requestConfig = {
             method: id ? 'PUT' : 'POST',
             body: JSON.stringify({
-                id: (id !== undefined ? parseInt(id) : id_place),
+                id: (id !== undefined ? id : String(id_place)),
                 id_usuario: parseInt(data.id_usuario),
                 nome: data.nome,
                 descricao: data.descricao,
@@ -133,7 +134,8 @@ export const RegisterPlace = () => {
             .then(response => {
                 console.log(response);
                 if (response.ok) {
-                    setIdPlace(prevId => prevId + 1);
+                    setIdPlace(prevId => parseInt(prevId) + 1);
+                    console.log(id_place);
                     alert('Local cadastrado com sucesso!');
                 } else {
                     throw new Error('Erro ao cadastrar local.');
