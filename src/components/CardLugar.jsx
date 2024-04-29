@@ -11,6 +11,20 @@ export function CardLugar() {
             .catch(error => console.log('Erro ao buscar lugares:', error))
     }, [])
 
+    const deletar = (id) => {
+        console.log(id)
+        fetch(`http://localhost:3000/lugares/${id}`, {
+            method: 'DELETE',
+        })
+            .then(() => {
+                alert("Lugar removido com sucesso!")
+                window.location.reload()
+            })
+            .catch(error => console.log('Erro ao deletar lugar:', error))
+
+
+    }
+
     return (
         <div className="card">
             {!!places && places.map(place => (
@@ -21,6 +35,7 @@ export function CardLugar() {
                     <p>Localização</p>
                     <p>Rua: {place.rua}<span> número: {place.numero}</span> </p>
                     <Link to={`/registerPlace/${place.id}`}>Editar</Link>
+                    <button onClick={() => deletar(place.id)}>Deletar</button>
                 </div>
             ))}
 

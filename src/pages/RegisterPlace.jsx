@@ -11,6 +11,8 @@ import { useParams } from 'react-router-dom';
 export const RegisterPlace = () => {
 
     const { id } = useParams();
+    const [id_place, setIdPlace] = useState(0);
+
     // const history = useHistory();
 
     const { register, handleSubmit, formState: { errors }, setValue } = useForm();
@@ -32,22 +34,39 @@ export const RegisterPlace = () => {
     });
 
     useEffect(() => {
+        axios.get('http://localhost:3000/lugares')
+            .then(response => {
+                const lastPlace = response.data[response.data.length - 1];
+                setIdPlace(lastPlace ? parseInt(lastPlace.id) + 1 : 1);
+            })
+            .catch(error => {
+                console.log('Erro ao obter último ID de lugar:', error);
+            });
+    }, []);
+
+    useEffect(() => {
+
         const fetchPlaceData = async () => {
             if (id) {
                 try {
-                    const response = await axios.get(`http://localhost:3000/lugares`);
-                    const place = response.data.find(place => place.id === parseInt(id));
+                    // const response = await axios.get(`http://localhost:3000/lugares`);
+                    const response = await axios.get("http://localhost:3000/lugares/" + id);
+                    // console.log(response.data);
+                    // console.log(response1.data);
+                    // console.log(id);
+                    const place = response.data;
+                    // const place = response.data.find(place => place.id == id);
 
                     // Verificar se o lugar foi encontrado
                     if (place) {
                         console.log(place.cep)
                         console.log(place.latitude)
                         setValue('nome', place.nome);
-                        setValue('id', place.id_usuario);
+                        setValue('id_usuario', place.id_usuario);
                         setValue('descricao', place.descricao);
                         setValue('praticas_esportivas', place.praticas_esportivas);
                         setValue('rua', place.rua);
-                        // setValue('cep'.place.cep)
+                        setValue('cep', place.cep)
                         setValue('numero', place.numero);
                         setValue('complemento', place.complemento);
                         setValue('bairro', place.bairro);
@@ -60,7 +79,7 @@ export const RegisterPlace = () => {
                             neighborhood: place.bairro || '',
                             city: place.cidade || '',
                             state: place.estado || '',
-                            cep: place.cep
+                            // cep: place.cep
                         });
                     } else {
                         console.log(`Lugar com ID ${id} não encontrado.`);
@@ -80,8 +99,7 @@ export const RegisterPlace = () => {
         state: ''
     });
 
-    const handleBlurCEP = async (event) => {
-        const cep = event.target.value;
+    const handleBlurCEP = async (cep) => {
         if (cep.length === 8) {
             try {
                 const response = await axios.get(`https://viacep.com.br/ws/${cep}/json/`);
@@ -90,7 +108,8 @@ export const RegisterPlace = () => {
                     street: data.logradouro || '',
                     neighborhood: data.bairro || '',
                     city: data.localidade || '',
-                    cep: cep || ''
+                    state: data.uf || ''
+
                 });
             } catch (error) {
                 console.log("Erro ao buscar CEP:", error);
@@ -99,9 +118,51 @@ export const RegisterPlace = () => {
     };
 
     const onSubmit = (data) => {
+        const requestConfig = {
+            method: id ? 'PUT' : 'POST',
+            body: JSON.stringify({
+                id: (id !== undefined ? id : String(id_place)),
+                id_usuario: parseInt(data.id_usuario),
+                nome: data.nome,
+                descricao: data.descricao,
+                cep: data.cep,
+                rua: data.rua,
+                numero: parseInt(data.numero),
+                complemento: data.complemento,
+                bairro: address.neighborhood,
+                cidade: address.city,
+                estado: address.state,
+                latitude: data.latitude,
+                longitude: data.longitude,
+                praticas_esportivas: data.praticas_esportivas
+            }),
+            headers: {
+                'Content-Type': 'application/json'
+            },
+        };
+        console.log(`http://localhost:3000/lugares${id ? `/${id}` : ''}`, requestConfig);
+
+        fetch(`http://localhost:3000/lugares${id ? `/${id}` : ''}`, requestConfig)
+            .then(response => {
+                console.log(response);
+                if (response.ok) {
+                    setIdPlace(prevId => parseInt(prevId) + 1);
+                    console.log(id_place);
+                    alert('Local cadastrado com sucesso!');
+                } else {
+                    throw new Error('Erro ao cadastrar local.');
+                }
+            })
+            .catch(error => {
+                console.error("Erro ao cadastrar local:", error);
+                alert('Erro ao cadastrar local!');
+            });
+
+
+
         console.log({
             Nome: data.nome,
-            "ID do usuário": data.id,
+            "ID do usuário": data.id_usuario,
             Descrição: data.descricao,
             PráticasEsportivas: data.praticas_esportivas,
             Rua: data.rua,
@@ -137,7 +198,7 @@ export const RegisterPlace = () => {
                             fullWidth
                             type="number"
                             label="ID do usuário"
-                            {...register("id", { required: true, min: 1 })}
+                            {...register("id_usuario", { required: true, min: 1 })}
                             error={!!errors.id}
                             helperText={errors.id ? "ID inválido" : ""}
                         />
@@ -181,9 +242,9 @@ export const RegisterPlace = () => {
                     <Grid item xs={12} sm={6}>
                         <TextField
                             fullWidth
-                            type="number"
+                            type="text"
                             label="CEP"
-                            onBlur={handleBlurCEP}
+                            {...register("cep", { onBlur: (e) => handleBlurCEP(e.target.value) })}
                             error={!!errors.CEP}
                             helperText={errors.CEP ? "CEP inválido" : ""}
                         />
