@@ -11,7 +11,7 @@ import { useParams } from 'react-router-dom';
 export const RegisterPlace = () => {
 
     const { id } = useParams();
-    const [id_place, setIdPlace] = useState([1]);
+    const [id_place, setIdPlace] = useState(0);
 
     // const history = useHistory();
 
@@ -34,6 +34,18 @@ export const RegisterPlace = () => {
     });
 
     useEffect(() => {
+        axios.get('http://localhost:3000/lugares')
+            .then(response => {
+                const lastPlace = response.data[response.data.length - 1];
+                setIdPlace(lastPlace ? parseInt(lastPlace.id) + 1 : 1);
+            })
+            .catch(error => {
+                console.log('Erro ao obter último ID de lugar:', error);
+            });
+    }, []);
+
+    useEffect(() => {
+
         const fetchPlaceData = async () => {
             if (id) {
                 try {

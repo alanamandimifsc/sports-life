@@ -14,7 +14,7 @@
       "bairro": "Bangu",
       "cidade": "Rio de Janeiro",
       "estado": "RJ",
-      "logado": "false"
+      "logado": true
     },
     {
       "id": "2",
@@ -79,7 +79,83 @@
       "cidade": "Joinville",
       "estado": "SC",
       "logado": "false"
+    },
+    {
+      "id": "6",
+      "nome": "alana",
+      "email": "alana@gmail.com",
+      "cpf": "10637225783",
+      "data_nasc": "2024-04-03",
+      "sexo": "Feminino",
+      "senha": "12345",
+      "cep": "88049015",
+      "rua": "Avenida Blumenau",
+      "numero": null,
+      "bairro": "Tapera",
+      "cidade": "Florianópolis",
+      "estado": "SC",
+      "logado": true
     }
   ],
-  "lugares": []
+  "lugares": [
+    {
+      "id": "1",
+      "id_usuario": 1,
+      "nome": "Praça da Bandeira 1",
+      "descricao": "Praça da Bandeira é um bairro da Zona Central do município do Rio de Janeiro, no Brasil. O bairro é cortado pela Rua Mariz e Barros, uma das principais vias de acesso ao Centro do Rio de Janeiro. O bairro é conhecido por abrigar o Estádio de São Januário, sede do Club de Regatas Vasco da Gama, e o Hospital Universitário Gaffrée e Guinle, da Universidade Federal do Estado do Rio de Janeiro.",
+      "cep": "20270-000",
+      "rua": "Rua Barão de Iguatemi",
+      "numero": 35,
+      "complemento": "Casa 1",
+      "bairro": "Praça da Bandeira",
+      "cidade": "Rio de Janeiro",
+      "estado": "RJ",
+      "latitude": "-22.9203",
+      "longitude": "-43.1917",
+      "praticas_esportivas": [
+        "caminhada",
+        "trilha"
+      ]
+    },
+    {
+      "id": "2",
+      "id_usuario": 1,
+      "nome": "Praia do Campeche",
+      "descricao": "A Praia do Campeche é uma praia brasileira localizada no município de Florianópolis, no estado de Santa Catarina. É uma das praias mais conhecidas da Ilha de Santa Catarina, sendo muito frequentada por turistas e moradores locais. A praia é conhecida por suas águas cristalinas e pela extensa faixa de areia branca.",
+      "cep": "88063-000",
+      "rua": "Avenida Campeche",
+      "numero": 2861,
+      "complemento": "Casa 1",
+      "bairro": "Campeche",
+      "cidade": "Florianópolis",
+      "estado": "SC",
+      "latitude": "-27.6792",
+      "longitude": "-48.4883",
+      "praticas_esportivas": [
+        "caminhada",
+        "corrida",
+        "natação",
+        "surf"
+      ]
+    },
+    {
+      "id": "3",
+      "id_usuario": 2,
+      "nome": "Praia",
+      "descricao": "Praia too do sul da ilha",
+      "cep": "88049015",
+      "rua": "Avenida Blumenau",
+      "numero": 34,
+      "complemento": "s/",
+      "bairro": "Tapera",
+      "cidade": "Florianópolis",
+      "estado": "SC",
+      "latitude": "-27.586932",
+      "longitude": "-48.63371575049416",
+      "praticas_esportivas": [
+        "caminhada",
+        "trilha"
+      ]
+    }
+  ]
 }

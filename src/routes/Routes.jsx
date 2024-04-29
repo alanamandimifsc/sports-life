@@ -9,17 +9,19 @@ import { DashBoard } from "../pages/DashBoard"
 
 export const Routes = createBrowserRouter([
     {
+
+        path: "/login",
+        element: <Login />
+    },
+    {
+        path: "/registerUser",
+        element: <RegisterUser />
+    },
+    {
         path: "/",
         element: <App />,
         children: [
-            {
-                path: "/login",
-                element: <Login />
-            },
-            {
-                path: "/registerUser",
-                element: <RegisterUser />
-            },
+
             {
                 path: "/registerPlace",
                 element: <RegisterPlace />

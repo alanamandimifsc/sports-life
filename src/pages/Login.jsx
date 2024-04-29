@@ -10,6 +10,7 @@ import IconButton from '@mui/material/IconButton';
 import InputAdornment from '@mui/material/InputAdornment';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
+import Axios from 'axios';
 
 export const Login = () => {
     const { register, handleSubmit, formState: { errors } } = useForm();
@@ -19,11 +20,27 @@ export const Login = () => {
         setShowPassword(!showPassword);
     };
 
-    const onSubmit = data => console.log(data);
+    const onSubmit = async (data) => {
+        const response = await Axios.get('http://localhost:3000/usuarios');
+        const users = response.data;
+        const user = users.find(u => u.email === data['E-mail'] && u.senha === data['Senha']);
+
+        if (user) {
+            await Axios.put(`http://localhost:3000/usuarios/${user.id}`, {
+                ...user,
+                logado: true
+            });
+            alert('Login efetuado com sucesso!');
+            window.location.href = '/dashboard';
+        } else {
+            alert('Usuário ou senha inválidos!');
+        }
+    };
+
 
     return (
         <Grid container justifyContent="center" style={{ minHeight: '90vh', alignItems: 'center' }}>
-            <Grid item xs={12} sm={12} md={10} lg={8}>
+            <Grid item xs={12} sm={8} md={8} lg={8} xl={10}>
                 <Paper elevation={3} style={{ padding: '30px' }}>
                     <Typography variant="h5" component="h1" align="center" gutterBottom>
                         Faça Login
@@ -33,9 +50,11 @@ export const Login = () => {
                             <Grid item xs={12}>
                                 <TextField
                                     fullWidth
-                                    type={showPassword ? 'text' : 'password'}
+                                    type="text"
                                     label="E-mail"
                                     {...register("E-mail", { required: true })}
+
+
                                 />
                             </Grid>
                             <Grid item xs={12}>
