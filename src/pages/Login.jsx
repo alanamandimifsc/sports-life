@@ -28,8 +28,11 @@ export const Login = () => {
         if (user) {
             await Axios.put(`http://localhost:3000/usuarios/${user.id}`, {
                 ...user,
-                logado: true
+                logado: true,
+
             });
+            localStorage.setItem("isAutenticado", true)
+            localStorage.setItem("id", user.id)
             alert('Login efetuado com sucesso!');
             window.location.href = '/dashboard';
         } else {
