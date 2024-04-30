@@ -19,6 +19,7 @@ export const PlaceList = () => {
 
 
 
+
         </div>
     )
 }

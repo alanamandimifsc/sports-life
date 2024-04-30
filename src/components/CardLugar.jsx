@@ -1,8 +1,10 @@
 import { Link } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import React, { useEffect } from 'react'
 export function CardLugar() {
 
     const [places, setPlaces] = React.useState([])
+    const location = useLocation();
 
     useEffect(() => {
         fetch('http://localhost:3000/lugares')
@@ -34,11 +36,15 @@ export function CardLugar() {
                     <p>Criado pelo usuario : {place.id_usuario}</p>
                     <p>Localização</p>
                     <p>Rua: {place.rua}<span> número: {place.numero}</span> </p>
-                    <Link to={`/registerPlace/${place.id}`}>Editar</Link>
-                    <button onClick={() => deletar(place.id)}>Deletar</button>
+                    {location.pathname === '/placeList' && (
+                        <>
+                            <Link to={`/registerPlace/${place.id}`}>Editar</Link>
+                            <button onClick={() => deletar(place.id)}>Deletar</button>
+                        </>
+                    )}
                 </div>
             ))}
 
         </div>
     )
-}
+} export default CardLugar;
