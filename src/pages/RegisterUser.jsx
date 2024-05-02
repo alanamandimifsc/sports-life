@@ -110,8 +110,10 @@ export const RegisterUser = () => {
 
     return (
         <Box maxWidth={650} margin="auto">
+            <h2 style={{ alignContent: "center" }}>Dados do Usuário</h2>
             <form onSubmit={handleSubmit(onSubmit)} style={{ width: '100%' }}>
                 <Grid container spacing={2}>
+
                     <Grid item xs={12} sm={6}>
                         <Paper style={{ padding: '20px' }}>
                             <TextField fullWidth type="text" label="Nome" {...register("nome", { required: true, maxLength: 100 })} />
@@ -195,6 +197,6 @@ export const RegisterUser = () => {
                     </Grid>
                 </Grid>
             </form>
-        </Box>
+        </Box >
     );
 };

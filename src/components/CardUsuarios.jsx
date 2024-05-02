@@ -43,13 +43,13 @@ const CardUsuarios = () => {
 
     useEffect(() => {
         if (places.length > 0) {
-            const map = L.map('map').setView([51.505, -0.09], 13); // Define a posição inicial do mapa e o nível de zoom
-            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map); // Adiciona camada de mapa base
+            const map = L.map('map').setView([51.505, -0.09], 13);
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
 
-            // Adicione marcadores aos locais de exercícios
+
             places.forEach(lugar => {
                 L.marker([lugar.latitude, lugar.longitude]).addTo(map)
-                    .bindPopup(`<b>${lugar.nome}</b><br>${lugar.descricao}`); // Define o popup com informações do local de exercício
+                    .bindPopup(`<b>${lugar.nome}</b><br>${lugar.descricao}`);
             });
         }
     }, [places]);
