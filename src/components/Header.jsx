@@ -58,22 +58,16 @@ function Header() {
                 ) : (
                     <>
                         <Button component={Link} to="/dashboard" color="inherit" sx={{ mr: 2 }}>
-                            Home
+                            Pagina Inicial
                         </Button>
-                        {/* <Button component={Link} to="/login" color="inherit" sx={{ mr: 2 }}>
-                            Login
-                        </Button> */}
-                        {/* <Button component={Link} to="/registerUser" color="inherit" sx={{ mr: 2 }}>
-                            Register User
-                        </Button> */}
                         <Button component={Link} to="/registerPlace" color="inherit" sx={{ mr: 2 }}>
-                            Register Place
+                            Cadastro de Lugar
                         </Button>
                         <Button component={Link} to="/placeList" color="inherit" sx={{ mr: 2 }}>
-                            Place List
+                            Lista de Lugares
                         </Button>
                         <Button color="inherit" onClick={handleLogout}>
-                            Logout
+                            Sair
                         </Button>
                     </>
                 )}

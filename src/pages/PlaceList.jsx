@@ -14,7 +14,7 @@ export const PlaceList = () => {
 
     return (
         <div>
-            <h1>Conheça as melhores dicas de lugar!</h1>
+            <h1>Conheça as melhores dicas de lugares para práticas esportivas!</h1>
             <CardLugar />
 
 

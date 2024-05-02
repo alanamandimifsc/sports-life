@@ -7,12 +7,12 @@ import { Link } from 'react-router-dom';
 import Axios from 'axios';
 
 const menuOptions = [
-    { text: 'Home', link: '/dashboard' },
+    { text: 'Pagina Inicial', link: '/dashboard' },
     // { text: 'Login', link: '/login' },
     // { text: 'Register User', link: '/registerUser' },
-    { text: 'Register Place', link: '/registerPlace' },
-    { text: 'Place List', link: '/placeList' },
-    { text: 'Logout', action: 'logout' }
+    { text: 'Cadastro de Lugar', link: '/registerPlace' },
+    { text: 'Lista de Lugares', link: '/placeList' },
+    { text: 'Sair', action: 'logout' }
 ];
 
 const Menu = ({ open }) => {

@@ -9,7 +9,7 @@ export const DashBoard = () => {
 
             <CardUsuarios />
             <CardLugar />
-            <Link to="/placeList">Lista de locais</Link>
+
         </div>
     )
 }

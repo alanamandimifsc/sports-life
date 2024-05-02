@@ -14,7 +14,7 @@
       "bairro": "Bangu",
       "cidade": "Rio de Janeiro",
       "estado": "RJ",
-      "logado": true
+      "logado": false
     },
     {
       "id": "2",
@@ -101,7 +101,7 @@
     {
       "id": "1",
       "id_usuario": 1,
-      "nome": "Praça da Bandeira 1",
+      "nome": "Praça da Bandeira",
       "descricao": "Praça da Bandeira é um bairro da Zona Central do município do Rio de Janeiro, no Brasil. O bairro é cortado pela Rua Mariz e Barros, uma das principais vias de acesso ao Centro do Rio de Janeiro. O bairro é conhecido por abrigar o Estádio de São Januário, sede do Club de Regatas Vasco da Gama, e o Hospital Universitário Gaffrée e Guinle, da Universidade Federal do Estado do Rio de Janeiro.",
       "cep": "20270-000",
       "rua": "Rua Barão de Iguatemi",
@@ -140,21 +140,62 @@
     },
     {
       "id": "3",
-      "id_usuario": 2,
-      "nome": "Praia",
-      "descricao": "Praia too do sul da ilha",
-      "cep": "88049015",
-      "rua": "Avenida Blumenau",
-      "numero": 34,
-      "complemento": "s/",
-      "bairro": "Tapera",
-      "cidade": "Florianópolis",
+      "id_usuario": 1,
+      "nome": "Parque Estadual da Serra do Tabuleiro",
+      "descricao": "O Parque Estadual da Serra do Tabuleiro é uma unidade de conservação de proteção integral localizada no estado de Santa Catarina, no Brasil. O parque é conhecido por abrigar uma grande diversidade de espécies de fauna e flora, incluindo algumas espécies ameaçadas de extinção. O parque é uma ótima opção para quem gosta de ecoturismo e de contato com a natureza.",
+      "cep": "88139-000",
+      "rua": "Rodovia SC-410",
+      "numero": 0,
+      "complemento": "Km 0",
+      "bairro": "Sertão do Trombudo",
+      "cidade": "Palhoça",
       "estado": "SC",
-      "latitude": "-27.586932",
-      "longitude": "-48.63371575049416",
+      "latitude": "-27.8775",
+      "longitude": "-48.7817",
       "praticas_esportivas": [
         "caminhada",
-        "trilha"
+        "trilha",
+        "ciclismo"
+      ]
+    },
+    {
+      "id": "4",
+      "id_usuario": 1,
+      "nome": "Parque Estadual do Rio Vermelho",
+      "descricao": "O Parque Estadual do Rio Vermelho é uma unidade de conservação de proteção integral localizada no estado de Santa Catarina, no Brasil. O parque é conhecido por abrigar uma grande diversidade de espécies de fauna e flora, incluindo algumas espécies ameaçadas de extinção. O parque é uma ótima opção para quem gosta de ecoturismo e de contato com a natureza.",
+      "cep": "88058-000",
+      "rua": "Rodovia João Gualberto Soares",
+      "numero": 0,
+      "complemento": "Km 0",
+      "bairro": "Rio Vermelho",
+      "cidade": "Florianópolis",
+      "estado": "SC",
+      "latitude": "-27.5325",
+      "longitude": "-48.4217",
+      "praticas_esportivas": [
+        "caminhada",
+        "trilha",
+        "ciclismo"
+      ]
+    },
+    {
+      "id": "5",
+      "id_usuario": 2,
+      "nome": "Jardim Botânico do Rio de Janeiro",
+      "descricao": "O Jardim Botânico do Rio de Janeiro é um jardim botânico localizado no bairro do Jardim Botânico, na Zona Sul do município do Rio de Janeiro, no Brasil. O jardim botânico é uma das principais atrações turísticas da cidade, sendo muito visitado por turistas e moradores locais. O jardim botânico é conhecido por abrigar uma grande diversidade de espécies de plantas, incluindo algumas espécies raras e ameaçadas de extinção.",
+      "cep": "22460-030",
+      "rua": "Rua Jardim Botânico",
+      "numero": 1008,
+      "complemento": "Casa 1",
+      "bairro": "Jardim Botânico",
+      "cidade": "Rio de Janeiro",
+      "estado": "RJ",
+      "latitude": "-22.9683",
+      "longitude": "-43.2250",
+      "praticas_esportivas": [
+        "caminhada",
+        "trilha",
+        "ciclismo"
       ]
     }
   ]
