@@ -14,7 +14,7 @@
       "bairro": "Bangu",
       "cidade": "Rio de Janeiro",
       "estado": "RJ",
-      "logado": false
+      "logado": true
     },
     {
       "id": "2",
@@ -95,6 +95,22 @@
       "cidade": "Florianópolis",
       "estado": "SC",
       "logado": true
+    },
+    {
+      "id": "7",
+      "nome": "Alana Beatriz Rostirolla Mandim",
+      "email": "alana_mandim@estudante.sesisenai.org.br",
+      "cpf": "08810623485",
+      "data_nasc": "2024-05-21",
+      "sexo": "Feminino",
+      "senha": "12345",
+      "cep": "20745311",
+      "rua": "Rua Dois de Fevereiro",
+      "numero": null,
+      "bairro": "Água Santa",
+      "cidade": "Rio de Janeiro",
+      "estado": "RJ",
+      "logado": false
     }
   ],
   "lugares": [
@@ -103,9 +119,9 @@
       "id_usuario": 1,
       "nome": "Praça da Bandeira",
       "descricao": "Praça da Bandeira é um bairro da Zona Central do município do Rio de Janeiro, no Brasil. O bairro é cortado pela Rua Mariz e Barros, uma das principais vias de acesso ao Centro do Rio de Janeiro. O bairro é conhecido por abrigar o Estádio de São Januário, sede do Club de Regatas Vasco da Gama, e o Hospital Universitário Gaffrée e Guinle, da Universidade Federal do Estado do Rio de Janeiro.",
-      "cep": "20270-000",
+      "cep": "",
       "rua": "Rua Barão de Iguatemi",
-      "numero": 35,
+      "numero": 3,
       "complemento": "Casa 1",
       "bairro": "Praça da Bandeira",
       "cidade": "Rio de Janeiro",
@@ -113,8 +129,8 @@
       "latitude": "-22.9203",
       "longitude": "-43.1917",
       "praticas_esportivas": [
-        "caminhada",
-        "trilha"
+        "Caminhada",
+        "Trilha"
       ]
     },
     {
@@ -132,10 +148,10 @@
       "latitude": "-27.6792",
       "longitude": "-48.4883",
       "praticas_esportivas": [
-        "caminhada",
-        "corrida",
-        "natação",
-        "surf"
+        "Caminhada",
+        "Corrida",
+        "Natação",
+        "Surf"
       ]
     },
     {
@@ -153,9 +169,9 @@
       "latitude": "-27.8775",
       "longitude": "-48.7817",
       "praticas_esportivas": [
-        "caminhada",
-        "trilha",
-        "ciclismo"
+        "Caminhada",
+        "Trilha",
+        "Ciclismo"
       ]
     },
     {
@@ -173,9 +189,9 @@
       "latitude": "-27.5325",
       "longitude": "-48.4217",
       "praticas_esportivas": [
-        "caminhada",
-        "trilha",
-        "ciclismo"
+        "Caminhada",
+        "Trilha",
+        "Ciclismo"
       ]
     },
     {
@@ -193,9 +209,9 @@
       "latitude": "-22.9683",
       "longitude": "-43.2250",
       "praticas_esportivas": [
-        "caminhada",
-        "trilha",
-        "ciclismo"
+        "Caminhada",
+        "Trilha",
+        "Ciclismo"
       ]
     }
   ]

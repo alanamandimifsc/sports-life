@@ -37,7 +37,7 @@ export function CardLugar() {
 
     const getUserName = (id) => {
         const userFound = user.find(user => user.id === id);
-        return userFound.nome;
+        return userFound ? userFound.nome : 'Usuário não encontrado';
     };
 
     return (
@@ -48,7 +48,17 @@ export function CardLugar() {
                         <Typography variant="h3">{place.nome}</Typography>
                         <Typography>{place.descricao}</Typography>
                         <Typography variant="subtitle1">Localização</Typography>
-                        <Typography component="p">Rua: {place.rua} número: {place.numero} Estado: {place.estado}</Typography>
+                        <Typography component="p">{place.rua} número: {place.numero} , {place.bairro}, {place.cidade} - {place.estado}</Typography>
+                        <Typography variant='subtitle1'>Tipos de Atividades Praticadas</Typography>
+                        {place.praticas_esportivas ? (
+                            <ul>
+                                {place.praticas_esportivas.map((pratica, index) => (
+                                    <Typography component="p" key={index}>{pratica}</Typography>
+                                ))}
+                            </ul>
+                        ) : (
+                            <Typography component="p">Nenhuma atividade esportiva listada.</Typography>
+                        )}
                         <Typography>Criado pelo usuário: {getUserName(place.id)}</Typography>
                         {location.pathname === '/placeList' && (
                             <>
