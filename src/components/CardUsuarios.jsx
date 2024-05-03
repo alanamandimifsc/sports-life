@@ -15,7 +15,7 @@ const CardUsuarios = () => {
     const [chartData, setChartData] = useState({});
     const [chartType, setChartType] = useState('');
     const [chartInstances, setChartInstances] = useState({});
-    const [places, setPlaces] = useState([]);
+
 
     useEffect(() => {
         const fetchUsuarios = async () => {
@@ -37,17 +37,17 @@ const CardUsuarios = () => {
         fetchUsuarios();
     }, []);
 
-    useEffect(() => {
-        const fetchPlaces = async () => {
-            try {
-                const response = await Axios.get('http://localhost:3000/lugares');
-                setPlaces(response.data);
-            } catch (error) {
-                console.error('Error fetching lugares:', error);
-            }
-        };
-        fetchPlaces();
-    }, []);
+    // useEffect(() => {
+    //     const fetchPlaces = async () => {
+    //         try {
+    //             const response = await Axios.get('http://localhost:3000/lugares');
+    //             setPlaces(response.data);
+    //         } catch (error) {
+    //             console.error('Error fetching lugares:', error);
+    //         }
+    //     };
+    //     fetchPlaces();
+    // }, []);
 
     useEffect(() => {
         const fetchLugares = async () => {
@@ -80,17 +80,17 @@ const CardUsuarios = () => {
     }, []);
 
     useEffect(() => {
-        if (places.length > 0) {
+        if (lugares.length > 0) {
             const map = L.map('map').setView([-21.505, -40.09], 3); // Define a posição inicial do mapa e o nível de zoom
             L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map); // Adiciona camada de mapa base
 
             // Adicione marcadores aos locais de exercícios
-            places.forEach(lugar => {
+            lugares.forEach(lugar => {
                 L.marker([lugar.latitude, lugar.longitude]).addTo(map)
                     .bindPopup(`<b>${lugar.nome}</b><br>${lugar.descricao}`); // Define o popup com informações do local de exercício
             });
         }
-    }, [places]);
+    }, [lugares]);
 
     useEffect(() => {
         const estadosLabels = Object.keys(estadosMaisLocais);
