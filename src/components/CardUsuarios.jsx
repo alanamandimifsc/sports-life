@@ -37,17 +37,7 @@ const CardUsuarios = () => {
         fetchUsuarios();
     }, []);
 
-    // useEffect(() => {
-    //     const fetchPlaces = async () => {
-    //         try {
-    //             const response = await Axios.get('http://localhost:3000/lugares');
-    //             setPlaces(response.data);
-    //         } catch (error) {
-    //             console.error('Error fetching lugares:', error);
-    //         }
-    //     };
-    //     fetchPlaces();
-    // }, []);
+
 
     useEffect(() => {
         const fetchLugares = async () => {
