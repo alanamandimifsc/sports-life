@@ -5,6 +5,36 @@ export const UsuariosContext = createContext();
 
 export const UsuariosProvider = ({ children }) => {
     const [usuarios, setUsuarios] = useState([]);
+    const [qtdUsuariosAtivos, setQtdUsuariosAtivos] = useState(0);
+
+    useEffect(() => {
+        getUsuarios();
+    }, []);
+
+    function getUsuarios() {
+        Axios.get('http://localhost:3000/usuarios')
+            .then(response => {
+                setUsuarios(response.data); // Aqui está a correção
+                countUsuariosAtivos(response.data); // Contagem de usuários ativos
+            })
+            .catch(erro => console.log(erro))
+    }
+
+    function countUsuariosAtivos(usuarios) {
+        let count = 0;
+        usuarios.forEach(usuario => {
+            if (usuario.logado === true) {
+                count++;
+            }
+        });
+        setQtdUsuariosAtivos(count);
+    }
+
+    function idUser(id) {
+        const user = usuarios.find(u => u.id === id);
+        return user ? user.nome : "Usuário não encontrado";
+    }
+
 
     async function login(email, senha) {
         const response = await Axios.get('http://localhost:3000/usuarios');
@@ -25,8 +55,26 @@ export const UsuariosProvider = ({ children }) => {
         }
     };
 
+    async function logout() {
+        try {
+            const id = localStorage.getItem('id');
+            const response = await Axios.get(`http://localhost:3000/usuarios/${id}`);
+            const user = response.data;
+            await Axios.put(`http://localhost:3000/usuarios/${id}`, {
+                ...user,
+                logado: false
+            });
+            localStorage.setItem('isAutenticado', false);
+            localStorage.setItem('id', 0);
+            window.location.href = '/login';
+        } catch (error) {
+            console.error('Error logging out:', error);
+        }
+    }
+
+
     return (
-        <UsuariosContext.Provider value={{ usuarios, login }}>
+        <UsuariosContext.Provider value={{ usuarios, login, qtdUsuariosAtivos, idUser, logout }}>
             {children}
         </UsuariosContext.Provider>
     );
