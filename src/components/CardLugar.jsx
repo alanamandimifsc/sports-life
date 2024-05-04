@@ -1,13 +1,16 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useContext } from 'react';
 import { Link } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import { Typography, Button, Grid } from '@mui/material';
+import { LugaresContext } from '../context/LugaresContex';
 
 export function CardLugar() {
 
     const [places, setPlaces] = React.useState([]);
     const [user, setUser] = React.useState([]);
     const location = useLocation();
+
+    const { deletar } = useContext(LugaresContext);
 
     useEffect(() => {
         fetch('http://localhost:3000/lugares')
@@ -23,17 +26,17 @@ export function CardLugar() {
             .catch(error => console.log('Erro ao buscar usuarios:', error));
     }, []);
 
-    const deletar = (id) => {
-        console.log(id);
-        fetch(`http://localhost:3000/lugares/${id}`, {
-            method: 'DELETE',
-        })
-            .then(() => {
-                alert("Lugar removido com sucesso!");
-                window.location.reload();
-            })
-            .catch(error => console.log('Erro ao deletar lugar:', error));
-    };
+    // const deletar = (id) => {
+    //     console.log(id);
+    //     fetch(`http://localhost:3000/lugares/${id}`, {
+    //         method: 'DELETE',
+    //     })
+    //         .then(() => {
+    //             alert("Lugar removido com sucesso!");
+    //             window.location.reload();
+    //         })
+    //         .catch(error => console.log('Erro ao deletar lugar:', error));
+    // };
 
     const getUserName = (id) => {
         const userFound = user.find(user => user.id === id);

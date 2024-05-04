@@ -4,7 +4,9 @@ import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
 import Divider from '@mui/material/Divider';
 import { Link } from 'react-router-dom';
+import { useContext } from 'react';
 import Axios from 'axios';
+import { UsuariosContext } from '../context/UsuariosContext';
 
 const menuOptions = [
     { text: 'Pagina Inicial', link: '/dashboard' },
@@ -16,6 +18,8 @@ const menuOptions = [
 ];
 
 const Menu = ({ open }) => {
+
+    const { logout } = useContext(UsuariosContext);
     const menuStyle = {
         backgroundColor: '#333', // Altere para a cor de fundo desejada
         color: '#fff', // Altere para a cor do texto desejada
@@ -26,12 +30,14 @@ const Menu = ({ open }) => {
                 // Atualize o usuário como deslogado no servidor
                 const id = localStorage.getItem('id');
                 console.log('id', id);
-                const response = await Axios.get(`http://localhost:3000/usuarios/${id}`);
-                const user = response.data;
-                await Axios.put(`http://localhost:3000/usuarios/${id}`, {
-                    ...user,
-                    logado: false
-                });
+                await logout(id);
+
+                // const response = await Axios.get(`http://localhost:3000/usuarios/${id}`);
+                // const user = response.data;
+                // await Axios.put(`http://localhost:3000/usuarios/${id}`, {
+                //     ...user,
+                //     logado: false
+                // });
 
                 // Limpe o localStorage
                 localStorage.setItem('isAutenticado', false);

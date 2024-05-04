@@ -79,16 +79,17 @@ export const LugaresProvider = ({ children }) => {
 
 
 
-    function deletaLugar(id) {
+    function deletar(id) {
         Axios.delete(`http://localhost:3000/lugares/${id}`)
             .then(response => {
                 setLugares(lugares.filter(lugar => lugar.id !== id));
+                alert('Lugar deletado com sucesso!');
             })
             .catch(erro => console.log(erro))
     }
 
     return (
-        <LugaresContext.Provider value={{ lugares, estadosMaisLocais, tiposExercicios, geraMapa }}>
+        <LugaresContext.Provider value={{ lugares, estadosMaisLocais, tiposExercicios, geraMapa, deletar }}>
             {children}
         </LugaresContext.Provider>
     );

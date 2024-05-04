@@ -55,18 +55,16 @@ export const UsuariosProvider = ({ children }) => {
         }
     };
 
-    async function logout() {
+    async function logout(id) {
         try {
-            const id = localStorage.getItem('id');
+
             const response = await Axios.get(`http://localhost:3000/usuarios/${id}`);
             const user = response.data;
             await Axios.put(`http://localhost:3000/usuarios/${id}`, {
                 ...user,
                 logado: false
             });
-            localStorage.setItem('isAutenticado', false);
-            localStorage.setItem('id', 0);
-            window.location.href = '/login';
+
         } catch (error) {
             console.error('Error logging out:', error);
         }
