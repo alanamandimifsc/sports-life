@@ -6,36 +6,135 @@ import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import L from "leaflet";
 import 'leaflet/dist/leaflet.css';
-import { UsuariosContext } from "../context/UsuariosContext";
 import { LugaresContext } from "../context/LugaresContex";
+import { UsuariosContext } from '../context/UsuariosContext';
 
 const CardUsuarios = () => {
-    // const [qtdUsuariosAtivos, setQtdUsuariosAtivos] = useState(0);
-    // const [lugares, setLugares] = useState([]);
-    // const [estadosMaisLocais, setEstadosMaisLocais] = useState({});
-    // const [tiposExercicios, setTiposExercicios] = useState({});
-    // const [chartData, setChartData] = useState({});
-    // const [chartType, setChartType] = useState('');
-    // const [chartInstances, setChartInstances] = useState({});
-    const { qtdUsuariosAtivos: usuariosAtivos } = useContext(UsuariosContext);
-    const { lugares: lugaresContext, estadosMaisLocais: estadosMaisLocaisContext, tiposExercicios: tiposExerciciosContext, chartData: chartDataContext, chartType: chartTypeContext, chartInstances: chartInstancesContext } = useContext(LugaresContext);
+    const { qtdUsuariosAtivos } = useContext(UsuariosContext);
+
+    const { estadosMaisLocais, tiposExercicios, geraMapa } = useContext(LugaresContext);
+
+    const [chartData, setChartData] = useState({});
+    const [chartType, setChartType] = useState('');
+    const [chartInstances, setChartInstances] = useState({});
+
+
+
+
 
     useEffect(() => {
-        setQtdUsuariosAtivos(usuariosAtivos);
-    }, [usuariosAtivos]);
+        const estadosLabels = Object.keys(estadosMaisLocais);
+        const estadosData = Object.values(estadosMaisLocais);
+
+        const tiposExerciciosLabels = Object.keys(tiposExercicios);
+        const tiposExerciciosData = Object.values(tiposExercicios);
+
+        const usuariosAtivosData = {
+            labels: ['Usuários Ativos'],
+            datasets: [
+                {
+                    label: 'Quantidade de Usuários',
+                    backgroundColor: 'rgba(75,192,192,0.2)',
+                    borderColor: 'rgba(75,192,192,1)',
+                    borderWidth: 1,
+                    hoverBackgroundColor: 'rgba(75,192,192,0.4)',
+                    hoverBorderColor: 'rgba(75,192,192,1)',
+                    data: [qtdUsuariosAtivos]
+                }
+            ]
+        };
+
+        const tiposExerciciosChartData = {
+            labels: tiposExerciciosLabels,
+            datasets: [{
+                label: 'Tipos de Exercícios',
+                backgroundColor: ['rgba(255, 99, 132, 0.2)', 'rgba(54, 162, 235, 0.2)', 'rgba(255, 206, 86, 0.2)', 'rgba(75, 192, 192, 0.2)', 'rgba(153, 102, 255, 0.2)', 'rgba(255, 159, 64, 0.2)'],
+                borderColor: ['rgba(255, 99, 132, 1)', 'rgba(54, 162, 235, 1)', 'rgba(255, 206, 86, 1)', 'rgba(75, 192, 192, 1)', 'rgba(153, 102, 255, 1)', 'rgba(255, 159, 64, 1)'],
+                borderWidth: 1,
+                hoverBackgroundColor: ['rgba(255, 99, 132, 0.4)', 'rgba(54, 162, 235, 0.4)', 'rgba(255, 206, 86, 0.4)', 'rgba(75, 192, 192, 0.4)', 'rgba(153, 102, 255, 0.4)', 'rgba(255, 159, 64, 0.4)'],
+                hoverBorderColor: ['rgba(255, 99, 132, 1)', 'rgba(54, 162, 235, 1)', 'rgba(255, 206, 86, 1)', 'rgba(75, 192, 192, 1)', 'rgba(153, 102, 255, 1)', 'rgba(255, 159, 64, 1)'],
+                data: tiposExerciciosData
+            }]
+        };
+
+        setChartData({
+            estados: {
+                labels: estadosLabels,
+                datasets: [{ data: estadosData }]
+            },
+            tiposExercicios: tiposExerciciosChartData,
+            usuariosAtivos: usuariosAtivosData
+        });
+
+        setChartType('estados');
+    }, [qtdUsuariosAtivos, estadosMaisLocais, tiposExercicios]);
 
     useEffect(() => {
-        setLugares(lugaresContext);
-        setEstadosMaisLocais(estadosMaisLocaisContext);
-        setTiposExercicios(tiposExerciciosContext);
-        setChartData(chartDataContext);
-        setChartType(chartTypeContext);
-        setChartInstances(chartInstancesContext);
-    }, [lugaresContext, estadosMaisLocaisContext, tiposExerciciosContext, chartDataContext, chartTypeContext, chartInstancesContext]);
+        // Destruir gráficos anteriores
+        Object.values(chartInstances).forEach(chart => {
+            if (chart && chart.destroy) {
+                chart.destroy();
+            }
+        });
 
-    useEffect(() => {
-        // Restante do código para renderização de gráficos e mapa
-    }, [lugares]);
+        // Criar novos gráficos
+        const newChartInstances = {};
+
+        if (chartData.usuariosAtivos) {
+            const usuariosAtivosChart = new Chart(document.getElementById('usuariosAtivosChart'), {
+                type: 'bar',
+                data: chartData.usuariosAtivos,
+                options: {
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: 'Usuários Ativos'
+                        }
+                    }
+                }
+            });
+            newChartInstances.usuariosAtivos = usuariosAtivosChart;
+        }
+
+        if (chartData[chartType]) {
+            const chart = new Chart(document.getElementById('chart'), {
+                labels: ['Exercícios Cadastrados'],
+                type: 'pie',
+                data: chartData[chartType],
+                options: {
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: chartType === 'estados' ? 'Estados com mais Cadastros' : 'Exercícios Cadastrados'
+                        }
+                    }
+                }
+            });
+            newChartInstances[chartType] = chart;
+        }
+
+        if (chartData.tiposExercicios) {
+            const tiposExerciciosChart = new Chart(document.getElementById('tiposExerciciosChart'), {
+
+                type: 'pie',
+                data: chartData.tiposExercicios,
+                options: {
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: 'Tipos de Exercícios Cadastrados'
+                        }
+                    }
+                }
+
+            });
+            newChartInstances['tiposExercicios'] = tiposExerciciosChart;
+        }
+
+        setChartInstances(newChartInstances);
+    }, [chartData, chartType]);
+
+
 
     return (
         <Box mt={4}>
@@ -59,6 +158,7 @@ const CardUsuarios = () => {
             </Grid>
         </Box>
     );
+
 };
 
 export default CardUsuarios;
