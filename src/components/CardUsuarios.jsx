@@ -12,7 +12,7 @@ import { UsuariosContext } from '../context/UsuariosContext';
 const CardUsuarios = () => {
     const { qtdUsuariosAtivos } = useContext(UsuariosContext);
 
-    const { estadosMaisLocais, tiposExercicios, geraMapa } = useContext(LugaresContext);
+    const { estadosMaisLocais, tiposExercicios, lugares } = useContext(LugaresContext);
 
     const [chartData, setChartData] = useState({});
     const [chartType, setChartType] = useState('');
@@ -133,6 +133,19 @@ const CardUsuarios = () => {
 
         setChartInstances(newChartInstances);
     }, [chartData, chartType]);
+
+    useEffect(() => {
+        if (lugares.length > 0) {
+            const map = L.map('map').setView([-21.505, -40.09], 3); // Define a posição inicial do mapa e o nível de zoom
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map); // Adiciona camada de mapa base
+
+            // Adicione marcadores aos locais de exercícios
+            lugares.forEach(lugar => {
+                L.marker([lugar.latitude, lugar.longitude]).addTo(map)
+                    .bindPopup(`<b>${lugar.nome}</b><br>${lugar.descricao}`); // Define o popup com informações do local de exercício
+            });
+        }
+    }, [lugares]);
 
 
 

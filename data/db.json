@@ -14,7 +14,7 @@
       "bairro": "Bangu",
       "cidade": "Rio de Janeiro",
       "estado": "RJ",
-      "logado": false
+      "logado": true
     },
     {
       "id": "2",
@@ -119,7 +119,7 @@
       "id_usuario": 1,
       "nome": "Praça da Bandeira",
       "descricao": "Praça da Bandeira é um bairro da Zona Central do município do Rio de Janeiro, no Brasil. O bairro é cortado pela Rua Mariz e Barros, uma das principais vias de acesso ao Centro do Rio de Janeiro. O bairro é conhecido por abrigar o Estádio de São Januário, sede do Club de Regatas Vasco da Gama, e o Hospital Universitário Gaffrée e Guinle, da Universidade Federal do Estado do Rio de Janeiro.",
-      "cep": "",
+      "cep": "20270-004",
       "rua": "Rua Barão de Iguatemi",
       "numero": 3,
       "complemento": "Casa 1",
@@ -196,7 +196,7 @@
     },
     {
       "id": "5",
-      "id_usuario": 2,
+      "id_usuario": 3,
       "nome": "Jardim Botânico do Rio de Janeiro",
       "descricao": "O Jardim Botânico do Rio de Janeiro é um jardim botânico localizado no bairro do Jardim Botânico, na Zona Sul do município do Rio de Janeiro, no Brasil. O jardim botânico é uma das principais atrações turísticas da cidade, sendo muito visitado por turistas e moradores locais. O jardim botânico é conhecido por abrigar uma grande diversidade de espécies de plantas, incluindo algumas espécies raras e ameaçadas de extinção.",
       "cep": "22460-030",

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { useForm } from 'react-hook-form';
 import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
@@ -7,37 +7,30 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
+import { LugaresContext } from '../context/LugaresContex';
 
 export const RegisterPlace = () => {
     const { id } = useParams();
-    const [id_place, setIdPlace] = useState(0);
 
-    const { register, handleSubmit, formState: { errors }, setValue } = useForm();
 
-    const [address, setAddress] = useState({
-        street: '',
-        neighborhood: '',
-        city: '',
-        state: ''
-    });
 
-    useEffect(() => {
-        axios.get('http://localhost:3000/lugares')
-            .then(response => {
-                const lastPlace = response.data[response.data.length - 1];
-                setIdPlace(lastPlace ? parseInt(lastPlace.id) + 1 : 1);
-            })
-            .catch(error => {
-                console.log('Erro ao obter último ID de lugar:', error);
-            });
-    }, []);
+    const { id_place, setIdPlace, buscaCep, setId, atualizaLugar } = useContext(LugaresContext);
+
+
+    const { register, handleSubmit, formState: { errors }, setValue, reset } = useForm();
+
+
 
     useEffect(() => {
         const fetchPlaceData = async () => {
+
             if (id) {
                 try {
                     const response = await axios.get(`http://localhost:3000/lugares/${id}`);
                     const place = response.data;
+
+                    console.log('place', place);
+                    console.log('cep', place.cep);
 
                     if (place) {
                         setValue('nome', place.nome);
@@ -46,6 +39,7 @@ export const RegisterPlace = () => {
                         setValue('rua', place.rua);
                         setValue('numero', place.numero);
                         setValue('complemento', place.complemento);
+                        setValue('cep', place.cep);
                         setValue('bairro', place.bairro);
                         setValue('cidade', place.cidade);
                         setValue('estado', place.estado);
@@ -69,66 +63,31 @@ export const RegisterPlace = () => {
                 } catch (error) {
                     console.log("Erro ao buscar lugares:", error);
                 }
+            } else {
+                reset();
+                // resetAdrres();
             }
+            setValue('id_usuario', localStorage.getItem('id'));
+            console.log('id_usuario', localStorage.getItem('id'));
         };
         fetchPlaceData();
     }, [id]);
 
+
+
     const handleBlurCEP = async (cep) => {
-        if (cep.length === 8) {
-            try {
-                const response = await axios.get(`https://viacep.com.br/ws/${cep}/json/`);
-                const data = response.data;
-                setAddress({
-                    street: data.logradouro || '',
-                    neighborhood: data.bairro || '',
-                    city: data.localidade || '',
-                    state: data.uf || ''
-                });
-            } catch (error) {
-                console.log("Erro ao buscar CEP:", error);
-            }
-        }
+        const dados = await buscaCep(cep);
+        setValue('rua', dados.logradouro);
+        setValue('bairro', dados.bairro);
+        setValue('cidade', dados.localidade);
+        setValue('estado', dados.uf);
+
     };
 
     const onSubmit = (data) => {
-        const requestConfig = {
-            method: id ? 'PUT' : 'POST',
-            body: JSON.stringify({
-                id: (id !== undefined ? id : String(id_place)),
-                id_usuario: parseInt(data.id_usuario),
-                nome: data.nome,
-                descricao: data.descricao,
-                cep: data.cep,
-                rua: data.rua,
-                numero: parseInt(data.numero),
-                complemento: data.complemento,
-                bairro: address.neighborhood,
-                cidade: address.city,
-                estado: address.state,
-                latitude: data.latitude,
-                longitude: data.longitude,
-                praticas_esportivas: Object.keys(data.praticas_esportivas).filter(pratica => data.praticas_esportivas[pratica])
-            }),
-            headers: {
-                'Content-Type': 'application/json'
-            },
-        };
+        console.log(data);
+        atualizaLugar(data);
 
-        fetch(`http://localhost:3000/lugares${id ? `/${id}` : ''}`, requestConfig)
-            .then(response => {
-                console.log(response);
-                if (response.ok) {
-                    setIdPlace(prevId => parseInt(prevId) + 1);
-                    alert('Local cadastrado com sucesso!');
-                } else {
-                    throw new Error('Erro ao cadastrar local.');
-                }
-            })
-            .catch(error => {
-                console.error("Erro ao cadastrar local:", error);
-                alert('Erro ao cadastrar local!');
-            });
     };
 
     return (
@@ -154,10 +113,11 @@ export const RegisterPlace = () => {
                             fullWidth
                             type="number"
                             label="ID do usuário"
-                            {...register("id_usuario", { required: true, min: 1 })}
+                            {...register("id_usuario")}//, { required: true, min: 1 })}
                             error={!!errors.id}
                             helperText={errors.id ? "ID inválido" : ""}
                             InputLabelProps={{ shrink: true }}
+                            disabled
                         />
                     </Grid>
                     <Grid item xs={12}>
@@ -204,6 +164,7 @@ export const RegisterPlace = () => {
                             fullWidth
                             type="text"
                             label="CEP"
+                            name='cep'
                             {...register("cep", { onBlur: (e) => handleBlurCEP(e.target.value) })}
                             error={!!errors.CEP}
                             helperText={errors.CEP ? "CEP inválido" : ""}
@@ -216,7 +177,7 @@ export const RegisterPlace = () => {
                             type="text"
                             label="Rua"
                             {...register("rua")}
-                            value={address.street}
+                            // value={address.street}
                             error={!!errors.rua}
                             helperText={errors.rua ? "Campo obrigatório" : ""}
                             InputLabelProps={{ shrink: true }}
@@ -250,7 +211,7 @@ export const RegisterPlace = () => {
                             type="text"
                             label="Bairro"
                             {...register("bairro")}
-                            value={address.neighborhood}
+                            // value={address.neighborhood}
                             error={!!errors.bairro}
                             helperText={errors.bairro ? "Campo obrigatório" : ""}
                             InputLabelProps={{ shrink: true }}
@@ -262,7 +223,7 @@ export const RegisterPlace = () => {
                             type="text"
                             label="Cidade"
                             {...register("cidade")}
-                            value={address.city}
+                            // value={address.city}
                             error={!!errors.cidade}
                             helperText={errors.cidade ? "Campo obrigatório" : ""}
                             InputLabelProps={{ shrink: true }}
@@ -274,7 +235,7 @@ export const RegisterPlace = () => {
                             type="text"
                             label="Estado"
                             {...register("estado")}
-                            value={address.state}
+                            // value={address.state}
                             error={!!errors.estado}
                             helperText={errors.estado ? "Campo obrigatório" : ""}
                             InputLabelProps={{ shrink: true }}
