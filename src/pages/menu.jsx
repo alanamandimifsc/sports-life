@@ -8,6 +8,7 @@ import { useContext } from 'react';
 import Axios from 'axios';
 import { UsuariosContext } from '../context/UsuariosContext';
 
+
 const menuOptions = [
     { text: 'Pagina Inicial', link: '/dashboard' },
     // { text: 'Login', link: '/login' },
@@ -17,7 +18,9 @@ const menuOptions = [
     { text: 'Sair', action: 'logout' }
 ];
 
-const Menu = ({ open }) => {
+const Menu = ({ open, toggleMenu }) => {
+
+
 
     const { logout } = useContext(UsuariosContext);
     const menuStyle = {
@@ -25,6 +28,7 @@ const Menu = ({ open }) => {
         color: '#fff', // Altere para a cor do texto desejada
     };
     const handleOptionClick = async (action) => {
+        toggleMenu();
         if (action === 'logout') {
             try {
                 // Atualize o usuário como deslogado no servidor
@@ -48,6 +52,10 @@ const Menu = ({ open }) => {
             } catch (error) {
                 console.error('Error logging out:', error);
             }
+
+
+
+
         }
     };
 

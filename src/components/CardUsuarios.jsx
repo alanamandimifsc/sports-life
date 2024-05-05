@@ -151,20 +151,24 @@ const CardUsuarios = () => {
 
     return (
         <Box mt={4}>
-            <Typography variant="h2">Dashboard</Typography>
-            <Grid container spacing={2}>
+            <Typography variant="h3">Vamos nos exercitar!!</Typography>
+            <Grid container spacing={2} sx={{ maxWidth: '100%', overflowX: 'hidden' }}>
+                {/* Usuários Ativos */}
                 <Grid item xs={12} sm={6} md={4}>
                     <Typography variant="h4">Usuários Ativos</Typography>
                     <canvas id="usuariosAtivosChart" style={{ width: '100%', height: 'auto' }}></canvas>
                 </Grid>
+                {/* Estados ou Tipos de Exercícios */}
                 <Grid item xs={12} sm={6} md={4}>
                     <Typography variant="h4">{chartType === 'estados' ? 'Estados com mais Cadastros' : 'Tipos de Exercícios Cadastrados'}</Typography>
                     <canvas id="chart" style={{ width: '100%', height: 'auto' }}></canvas>
                 </Grid>
+                {/* Lugares */}
                 <Grid item xs={12} sm={6} md={4}>
                     <Typography variant="h4">Lugares</Typography>
                     <canvas id="tiposExerciciosChart" style={{ width: '100%', height: 'auto' }}></canvas>
                 </Grid>
+                {/* Mapa */}
                 <Grid item xs={12} sm={12}>
                     <div id="map" style={{ width: '100%', height: 400 }}></div>
                 </Grid>

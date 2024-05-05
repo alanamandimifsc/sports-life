@@ -111,6 +111,22 @@
       "cidade": "Rio de Janeiro",
       "estado": "RJ",
       "logado": false
+    },
+    {
+      "id": "8",
+      "nome": "Alana Beatriz Rostirolla Mandim",
+      "email": "alanamandim@gmail.com",
+      "cpf": "10689578956",
+      "data_nasc": "2024-05-13",
+      "sexo": "Feminino",
+      "senha": "1234",
+      "cep": "20745311",
+      "rua": "Rua Dois de Fevereiro",
+      "numero": 123,
+      "bairro": "Água Santa",
+      "cidade": "Rio de Janeiro",
+      "estado": "RJ",
+      "logado": false
     }
   ],
   "lugares": [
@@ -212,6 +228,25 @@
         "Caminhada",
         "Trilha",
         "Ciclismo"
+      ]
+    },
+    {
+      "id": "6",
+      "id_usuario": 1,
+      "nome": "Praça da Bandeira",
+      "descricao": "Praça da Bandeira é um bairro da Zona Central do município do Rio de Janeiro, no Brasil. O bairro é cortado pela Rua Mariz e Barros, uma das principais vias de acesso ao Centro do Rio de Janeiro. O bairro é conhecido por abrigar o Estádio de São Januário, sede do Club de Regatas Vasco da Gama, e o Hospital Universitário Gaffrée e Guinle, da Universidade Federal do Estado do Rio de Janeiro.",
+      "cep": "20745311",
+      "rua": "Rua Dois de Fevereiro",
+      "numero": 2,
+      "complemento": "s/",
+      "bairro": "Água Santa",
+      "cidade": "Rio de Janeiro",
+      "estado": "RJ",
+      "latitude": "-55.786",
+      "longitude": "-43.1917",
+      "praticas_esportivas": [
+        "Trilha",
+        "Musculacao"
       ]
     }
   ]

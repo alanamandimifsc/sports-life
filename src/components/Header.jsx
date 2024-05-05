@@ -3,11 +3,12 @@ import { Link } from 'react-router-dom';
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
+import IconButton from '@mui/material/IconButton'; // Importe o IconButton
+import MenuIcon from '@mui/icons-material/Menu'; // Importe o ícone do menu
 import Button from '@mui/material/Button';
 import { useTheme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import Menu from '../pages/menu'; // Importe o componente Menu
-import Axios from 'axios';
 import { UsuariosContext } from '../context/UsuariosContext';
 
 function Header() {
@@ -17,37 +18,13 @@ function Header() {
     const { logout } = useContext(UsuariosContext);
 
     const handleLogout = async () => {
+        // Função de logout do contexto
         const id = localStorage.getItem('id');
-        console.log('id', id);
         await logout(id);
         localStorage.setItem('isAutenticado', false);
         localStorage.setItem('id', 0);
         window.location.href = '/login';
     }
-
-    // const handleLogout = async () => {
-    //     try {
-    //         // Atualize o usuário como deslogado no servidor
-    //         const id = localStorage.getItem('id');
-    //         console.log('id', id);
-    //         const response = await Axios.get(`http://localhost:3000/usuarios/${id}`);
-    //         const user = response.data;
-    //         await Axios.put(`http://localhost:3000/usuarios/${id}`, {
-    //             ...user,
-    //             logado: false
-    //         });
-
-    //         // Limpe o localStorage
-    //         localStorage.setItem('isAutenticado', false);
-    //         localStorage.setItem('id', 0);
-
-    //         // Redirecione para a página de login
-    //         window.location.href = '/login';
-    //     } catch (error) {
-    //         console.error('Error logging out:', error);
-    //     }
-    // }
-
 
 
 
@@ -56,20 +33,27 @@ function Header() {
         setMenuOpen(!menuOpen);
     };
 
+
     return (
-        <AppBar position="fixed" sx={{ height: 56 }}>
+        <AppBar position="fixed">
             <Toolbar>
                 <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
                     Sports Life
                 </Typography>
                 {isMobile ? (
-                    <Button color="inherit" onClick={toggleMenu}>
-                        Menu
-                    </Button>
+                    <IconButton
+                        color="inherit"
+                        aria-label="open drawer"
+                        edge="end"
+                        onClick={toggleMenu}
+                        sx={{ mr: 2 }}
+                    >
+                        <MenuIcon />
+                    </IconButton>
                 ) : (
                     <>
                         <Button component={Link} to="/dashboard" color="inherit" sx={{ mr: 2 }}>
-                            Pagina Inicial
+                            Página Inicial
                         </Button>
                         <Button component={Link} to="/registerPlace" color="inherit" sx={{ mr: 2 }}>
                             Cadastro de Lugar
@@ -83,7 +67,7 @@ function Header() {
                     </>
                 )}
             </Toolbar>
-            {isMobile && <Menu open={menuOpen} />} {/* Renderiza o componente Menu somente em dispositivos móveis */}
+            {isMobile && <Menu open={menuOpen} toggleMenu={toggleMenu} />}
         </AppBar>
     );
 }

@@ -6,6 +6,18 @@ export const UsuariosContext = createContext();
 export const UsuariosProvider = ({ children }) => {
     const [usuarios, setUsuarios] = useState([]);
     const [qtdUsuariosAtivos, setQtdUsuariosAtivos] = useState(0);
+    const [id_user, setIdUser] = useState(0);
+
+    useEffect(() => {
+        Axios.get('http://localhost:3000/usuarios')
+            .then(response => {
+                const lastUser = response.data[response.data.length - 1];
+                setIdUser(lastUser ? parseInt(lastUser.id) + 1 : 1);
+            })
+            .catch(error => {
+                console.log('Erro ao obter último ID de usuário:', error);
+            });
+    }, []);
 
     useEffect(() => {
         getUsuarios();
@@ -70,9 +82,47 @@ export const UsuariosProvider = ({ children }) => {
         }
     }
 
+    async function criarUsuario(data) {
+        const response = await Axios.get('http://localhost:3000/usuarios');
+        const users = response.data;
+        const user = users.find(u => u.cpf === data.cpf);
+
+        if (!user) {
+            fetch("http://localhost:3000/usuarios", {
+                method: 'POST',
+                body: JSON.stringify({
+                    id: String(id_user),
+                    nome: data.nome,
+                    email: data.email,
+                    cpf: data.cpf,
+                    data_nasc: data.data_nasc,
+                    sexo: data.sexo,
+                    senha: data.senha,
+                    cep: data.cep,
+                    rua: data.rua,
+                    numero: parseInt(data.numero),
+                    bairro: data.bairro,
+                    cidade: data.cidade,
+                    estado: data.estado,
+                    logado: false
+                }),
+            })
+                .then(() => {
+                    setIdUser(prevId => parseInt(prevId) + 1);
+
+                    alert('Cadastro efetuado com sucesso!');
+                    window.location.href = '/login';
+                })
+                .catch(error => console.log('Erro ao cadastrar usuário:', error));
+        } else {
+            alert('Usuário já possui cadastro');
+        }
+    }
+
+
 
     return (
-        <UsuariosContext.Provider value={{ usuarios, login, qtdUsuariosAtivos, idUser, logout }}>
+        <UsuariosContext.Provider value={{ usuarios, login, qtdUsuariosAtivos, idUser, logout, criarUsuario }}>
             {children}
         </UsuariosContext.Provider>
     );

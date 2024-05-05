@@ -29,8 +29,8 @@ export const RegisterPlace = () => {
                     const response = await axios.get(`http://localhost:3000/lugares/${id}`);
                     const place = response.data;
 
-                    console.log('place', place);
-                    console.log('cep', place.cep);
+
+                    console.log(place.praticas_esportivas)
 
                     if (place) {
                         setValue('nome', place.nome);
@@ -45,18 +45,15 @@ export const RegisterPlace = () => {
                         setValue('estado', place.estado);
                         setValue('latitude', place.latitude);
                         setValue('longitude', place.longitude);
-                        setAddress({
-                            street: place.rua || '',
-                            neighborhood: place.bairro || '',
-                            city: place.cidade || '',
-                            state: place.estado || '',
-                        });
+
 
                         if (place.praticas_esportivas && Array.isArray(place.praticas_esportivas)) {
                             place.praticas_esportivas.forEach(pratica => {
                                 setValue(`praticas_esportivas[${pratica}]`, true);
+
                             });
                         }
+
                     } else {
                         console.log(`Lugar com ID ${id} não encontrado.`);
                     }
@@ -92,12 +89,12 @@ export const RegisterPlace = () => {
 
     return (
         <form onSubmit={handleSubmit(onSubmit)}>
-            <Paper elevation={3} style={{ padding: 20, maxWidth: 500, margin: 'auto' }}>
+            <Paper elevation={3} style={{ padding: 30, maxWidth: 500, margin: 'auto' }}>
                 <Typography variant="h5" component="h1" align="center" gutterBottom>
                     Registrar Local
                 </Typography>
                 <Grid container spacing={2}>
-                    <Grid item xs={12} md={6}>
+                    <Grid item xs={12} md={12}>
                         <TextField
                             fullWidth
                             type="text"

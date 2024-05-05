@@ -26,17 +26,6 @@ export function CardLugar() {
             .catch(error => console.log('Erro ao buscar usuarios:', error));
     }, []);
 
-    // const deletar = (id) => {
-    //     console.log(id);
-    //     fetch(`http://localhost:3000/lugares/${id}`, {
-    //         method: 'DELETE',
-    //     })
-    //         .then(() => {
-    //             alert("Lugar removido com sucesso!");
-    //             window.location.reload();
-    //         })
-    //         .catch(error => console.log('Erro ao deletar lugar:', error));
-    // };
 
     const getUserName = (id) => {
         const userFound = user.find(user => user.id === id);
@@ -44,10 +33,10 @@ export function CardLugar() {
     };
 
     return (
-        <Grid container spacing={2}>
+        <Grid container spacing={2} sx={{ maxWidth: '100%', overflowX: 'hidden' }}>
             {places.map(place => (
-                <Grid item xs={12} key={place.id}>
-                    <div className="card">
+                <Grid item xs={12} sm={12} md={12} key={place.id}>
+                    <div className="card" style={{ padding: '10px', boxShadow: '0 4px 8px rgba(0,0,0,0.1)' }}>
                         <Typography variant="h3">{place.nome}</Typography>
                         <Typography>{place.descricao}</Typography>
                         <Typography variant="subtitle1">Localização</Typography>
@@ -76,6 +65,7 @@ export function CardLugar() {
             ))}
         </Grid>
     );
+
 }
 
 export default CardLugar;
