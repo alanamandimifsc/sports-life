@@ -14,19 +14,19 @@ export const LugaresProvider = ({ children }) => {
     const [id, setId] = useState();
     const { setValue } = useForm();
 
-    async function buscaCep(cep) {
+    // async function buscaCep(cep) {
 
-        if (cep.length === 8) {
-            try {
-                const response = await Axios.get(`https://viacep.com.br/ws/${cep}/json/`);
-                const data = response.data;
-                return data;
+    //     if (cep.length === 8) {
+    //         try {
+    //             const response = await Axios.get(`https://viacep.com.br/ws/${cep}/json/`);
+    //             const data = response.data;
+    //             return data;
 
-            } catch (error) {
-                console.log("Erro ao buscar CEP:", error);
-            }
-        }
-    };
+    //         } catch (error) {
+    //             console.log("Erro ao buscar CEP:", error);
+    //         }
+    //     }
+    // };
 
 
     useEffect(() => {
@@ -61,7 +61,8 @@ export const LugaresProvider = ({ children }) => {
     }, []);
 
 
-    function atualizaLugar(data) {
+    function atualizaLugar(data, id) {
+        console.log(id);
         const requestConfig = {
             method: id ? 'PUT' : 'POST',
             body: JSON.stringify({
@@ -91,6 +92,9 @@ export const LugaresProvider = ({ children }) => {
                 if (response.ok) {
                     setIdPlace(prevId => parseInt(prevId) + 1);
                     alert('Local cadastrado com sucesso!');
+                    //mudar de pagina
+                    window.location.href = '/placeList';
+                    // window.location.reload();
                 } else {
                     throw new Error('Erro ao cadastrar local.');
                 }
@@ -115,7 +119,7 @@ export const LugaresProvider = ({ children }) => {
     return (
         <LugaresContext.Provider value={{
             lugares, estadosMaisLocais, tiposExercicios, deletar,
-            id_place, setIdPlace, buscaCep, setId, atualizaLugar, setValue
+            id_place, setIdPlace, setId, atualizaLugar, setValue
         }}>
             {children}
         </LugaresContext.Provider>

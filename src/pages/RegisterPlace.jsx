@@ -8,11 +8,13 @@ import Typography from '@mui/material/Typography';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import { LugaresContext } from '../context/LugaresContex';
+import { useBuscaCoordenadas } from '../hook/useBuscaCoordenadas';
+import { useBuscaCep } from '../hook/useBuscaCep';
 
 export const RegisterPlace = () => {
     const { id } = useParams();
-    const { buscaCep, atualizaLugar } = useContext(LugaresContext);
-    const { register, handleSubmit, formState: { errors }, setValue, reset } = useForm();
+    const { atualizaLugar } = useContext(LugaresContext);
+    const { register, handleSubmit, formState: { errors }, setValue, reset, watch } = useForm();
 
 
 
@@ -65,7 +67,7 @@ export const RegisterPlace = () => {
 
 
     const handleBlurCEP = async (cep) => {
-        const dados = await buscaCep(cep);
+        const dados = await useBuscaCep(cep);
         setValue('rua', dados.logradouro);
         setValue('bairro', dados.bairro);
         setValue('cidade', dados.localidade);
@@ -73,9 +75,31 @@ export const RegisterPlace = () => {
 
     };
 
+    const handleBlurNumero = async (numero) => {
+        try {
+            const cep = watch("cep");
+            const dados = await useBuscaCep(cep);
+
+            // Monta o endereço completo com CEP
+            const enderecoCompleto = `${dados.logradouro} ${numero}, ${dados.bairro}, ${dados.localidade}, ${dados.uf}, Brasil`;
+            const data = await useBuscaCoordenadas(enderecoCompleto);
+
+            // Verifica se encontrou algum resultado
+            if (data && data.length > 0) {
+                const firstResult = data[0]; // Pega o primeiro resultado encontrado
+                setValue('latitude', firstResult.lat);
+                setValue('longitude', firstResult.lon);
+            } else {
+                console.error('Endereço não encontrado');
+            }
+        } catch (error) {
+            console.error('Erro ao obter as coordenadas:', error.message);
+        }
+    };
+
     const onSubmit = (data) => {
         console.log(data);
-        atualizaLugar(data);
+        atualizaLugar(data, id);
 
     };
 
@@ -176,7 +200,8 @@ export const RegisterPlace = () => {
                             fullWidth
                             type="number"
                             label="Número"
-                            {...register("numero", { required: true, maxLength: 5 })}
+                            {...register("numero", { onBlur: (e) => handleBlurNumero(e.target.value) })}
+                            // {...register("numero", { required: true, maxLength: 5 })}
                             error={!!errors.numero}
                             helperText={errors.numero ? "Número inválido" : ""}
                             InputLabelProps={{ shrink: true }}
