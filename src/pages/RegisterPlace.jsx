@@ -26,7 +26,7 @@ export const RegisterPlace = () => {
                     // console.log(place.praticas_esportivas)
                     if (place) {
                         setValue('nome', place.nome);
-                        setValue('id_usuario', place.id_usuario);
+                        setValue('id_usuario', String(place.id_usuario));
                         setValue('descricao', place.descricao);
                         setValue('rua', place.rua);
                         setValue('numero', place.numero);
@@ -44,6 +44,7 @@ export const RegisterPlace = () => {
                             });
                         }
                         setValue('imagem', place.imagem);
+                        setValue('id_usuario', localStorage.getItem('id'));
 
                     } else {
                         console.log(`Lugar com ID ${id} não encontrado.`);
@@ -55,8 +56,9 @@ export const RegisterPlace = () => {
                 reset();
 
             }
+
             setValue('id_usuario', localStorage.getItem('id'));
-            // console.log('id_usuario', localStorage.getItem('id'));
+
         };
         fetchPlaceData();
     }, [id]);

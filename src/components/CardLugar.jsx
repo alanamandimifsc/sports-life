@@ -56,7 +56,7 @@ export function CardLugar() {
                         ) : (
                             <Typography component="p">Nenhuma atividade esportiva listada.</Typography>
                         )}
-                        <Typography>Criado pelo usuário: {getUserName(place.id)}</Typography>
+                        <Typography>Criado pelo usuário: {getUserName(place.id_usuario)}</Typography>
                         {/* Botões de edição e exclusão */}
                         {location.pathname === '/placeList' && (
                             <>

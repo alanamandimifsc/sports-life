@@ -66,7 +66,7 @@ export const LugaresProvider = ({ children }) => {
             method: id ? 'PUT' : 'POST',
             body: JSON.stringify({
                 id: (id !== undefined ? id : String(id_place)),
-                id_usuario: parseInt(data.id_usuario),
+                id_usuario: String(data.id_usuario),
                 nome: data.nome,
                 descricao: data.descricao,
                 cep: data.cep,
@@ -78,7 +78,8 @@ export const LugaresProvider = ({ children }) => {
                 estado: data.estado,
                 latitude: data.latitude,
                 longitude: data.longitude,
-                praticas_esportivas: Object.keys(data.praticas_esportivas).filter(pratica => data.praticas_esportivas[pratica])
+                praticas_esportivas: Object.keys(data.praticas_esportivas).filter(pratica => data.praticas_esportivas[pratica]),
+                imagem: data.imagem
             }),
             headers: {
                 'Content-Type': 'application/json'

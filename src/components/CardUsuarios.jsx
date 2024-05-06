@@ -150,7 +150,7 @@ const CardUsuarios = () => {
                 {/* Usuários Ativos */}
                 <Grid item xs={12} sm={6} md={4}>
                     <Typography variant="h4">Usuários Ativos</Typography>
-                    <canvas id="usuariosAtivosChart" style={{ width: '100%', height: 'auto' }}></canvas>
+                    <canvas id="usuariosAtivosChart" style={{ width: '100%', height: 'auto', minHeight: '200px', marginTop: '30px' }}></canvas>
                 </Grid>
                 {/* Estados ou Tipos de Exercícios */}
                 <Grid item xs={12} sm={6} md={4}>
@@ -160,7 +160,7 @@ const CardUsuarios = () => {
                 {/* Lugares */}
                 <Grid item xs={12} sm={6} md={4}>
                     <Typography variant="h4">Lugares</Typography>
-                    <canvas id="tiposExerciciosChart" style={{ width: '100%', height: 'auto' }}></canvas>
+                    <canvas id="tiposExerciciosChart" style={{ width: '100%', height: 'auto', marginTop: '20px' }}></canvas>
                 </Grid>
                 {/* Mapa */}
                 <Grid item xs={12} sm={12}>
