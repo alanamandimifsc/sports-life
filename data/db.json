@@ -14,7 +14,7 @@
       "bairro": "Bangu",
       "cidade": "Rio de Janeiro",
       "estado": "RJ",
-      "logado": false
+      "logado": true
     },
     {
       "id": "2",
@@ -201,6 +201,25 @@
       "estado": "SC",
       "latitude": "-27.68601",
       "longitude": "-48.56472",
+      "praticas_esportivas": [
+        "Caminhada"
+      ],
+      "imagem": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRFeh38cxY9XCpGrjImCy0wk_8kU3qNkQGCPw&s"
+    },
+    {
+      "id": "7",
+      "id_usuario": "1",
+      "nome": "Lagoa da Conceição",
+      "descricao": "Praia too do sul da ilha",
+      "cep": "88062220",
+      "rua": "Rua Doutor Alfredo Daura Jorge",
+      "numero": 2,
+      "complemento": "s/",
+      "bairro": "Lagoa da Conceição",
+      "cidade": "Florianópolis",
+      "estado": "SC",
+      "latitude": "-27.6060733",
+      "longitude": "-48.4748852",
       "praticas_esportivas": [
         "Caminhada"
       ],

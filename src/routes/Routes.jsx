@@ -5,7 +5,7 @@ import { RegisterPlace } from "../pages/RegisterPlace"
 import { RegisterUser } from "../pages/RegisterUser"
 import { PlaceList } from "../pages/PlaceList"
 import { DashBoard } from "../pages/DashBoard"
-import Menu from "../pages/menu";
+import Menu from "../components/menu";
 
 import { Navigate } from "react-router-dom";
 

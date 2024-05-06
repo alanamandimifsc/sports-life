@@ -8,7 +8,7 @@ import MenuIcon from '@mui/icons-material/Menu'; // Importe o ícone do menu
 import Button from '@mui/material/Button';
 import { useTheme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
-import Menu from '../pages/menu'; // Importe o componente Menu
+import Menu from './menu'; // Importe o componente Menu
 import { UsuariosContext } from '../context/UsuariosContext';
 
 function Header() {
