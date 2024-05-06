@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useContext } from 'react';
 import { useForm } from 'react-hook-form';
 import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
@@ -7,10 +7,9 @@ import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
-import Axios from 'axios';
 import { useBuscaCep } from '../hook/useBuscaCep';
 import { UsuariosContext } from '../context/UsuariosContext';
-import { Input } from '@mui/icons-material';
+
 
 
 

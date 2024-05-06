@@ -120,7 +120,6 @@ export const UsuariosProvider = ({ children }) => {
     }
 
 
-
     return (
         <UsuariosContext.Provider value={{ usuarios, login, qtdUsuariosAtivos, idUser, logout, criarUsuario }}>
             {children}

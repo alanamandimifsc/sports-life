@@ -33,6 +33,10 @@ export const Routes = createBrowserRouter([
                 <App />
             </PrivateRoute>,
         children: [
+            {
+                path: "/",
+                element: <Navigate to="/dashboard" replace={true} />
+            },
 
             {
                 path: "/registerPlace",

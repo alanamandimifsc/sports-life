@@ -17,18 +17,18 @@ function Header() {
     const [menuOpen, setMenuOpen] = useState(false); // Estado para controlar a exibição do menu
     const { logout } = useContext(UsuariosContext);
 
+
+
     const handleLogout = async () => {
-        // Função de logout do contexto
         const id = localStorage.getItem('id');
         await logout(id);
-        localStorage.setItem('isAutenticado', false);
-        localStorage.setItem('id', 0);
+        localStorage.clear();
         window.location.href = '/login';
     }
 
 
 
-    // Função para alternar o estado do menu
+    //alternar o estado do menu
     const toggleMenu = () => {
         setMenuOpen(!menuOpen);
     };

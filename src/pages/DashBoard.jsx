@@ -1,5 +1,4 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
 import { CardLugar } from '../components/CardLugar'
 import CardUsuarios from '../components/CardUsuarios'
 

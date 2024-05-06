@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext } from 'react';
+import React, { useEffect, useContext } from 'react';
 import { useForm } from 'react-hook-form';
 import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
@@ -11,12 +11,7 @@ import { LugaresContext } from '../context/LugaresContex';
 
 export const RegisterPlace = () => {
     const { id } = useParams();
-
-
-
-    const { id_place, setIdPlace, buscaCep, setId, atualizaLugar } = useContext(LugaresContext);
-
-
+    const { buscaCep, atualizaLugar } = useContext(LugaresContext);
     const { register, handleSubmit, formState: { errors }, setValue, reset } = useForm();
 
 
@@ -28,10 +23,7 @@ export const RegisterPlace = () => {
                 try {
                     const response = await axios.get(`http://localhost:3000/lugares/${id}`);
                     const place = response.data;
-
-
-                    console.log(place.praticas_esportivas)
-
+                    // console.log(place.praticas_esportivas)
                     if (place) {
                         setValue('nome', place.nome);
                         setValue('id_usuario', place.id_usuario);
@@ -45,14 +37,13 @@ export const RegisterPlace = () => {
                         setValue('estado', place.estado);
                         setValue('latitude', place.latitude);
                         setValue('longitude', place.longitude);
-
-
                         if (place.praticas_esportivas && Array.isArray(place.praticas_esportivas)) {
                             place.praticas_esportivas.forEach(pratica => {
                                 setValue(`praticas_esportivas[${pratica}]`, true);
 
                             });
                         }
+                        setValue('imagem', place.imagem);
 
                     } else {
                         console.log(`Lugar com ID ${id} não encontrado.`);
@@ -62,14 +53,13 @@ export const RegisterPlace = () => {
                 }
             } else {
                 reset();
-                // resetAdrres();
+
             }
             setValue('id_usuario', localStorage.getItem('id'));
-            console.log('id_usuario', localStorage.getItem('id'));
+            // console.log('id_usuario', localStorage.getItem('id'));
         };
         fetchPlaceData();
     }, [id]);
-
 
 
     const handleBlurCEP = async (cep) => {
@@ -110,7 +100,7 @@ export const RegisterPlace = () => {
                             fullWidth
                             type="number"
                             label="ID do usuário"
-                            {...register("id_usuario")}//, { required: true, min: 1 })}
+                            {...register("id_usuario")}
                             error={!!errors.id}
                             helperText={errors.id ? "ID inválido" : ""}
                             InputLabelProps={{ shrink: true }}
@@ -174,7 +164,6 @@ export const RegisterPlace = () => {
                             type="text"
                             label="Rua"
                             {...register("rua")}
-                            // value={address.street}
                             error={!!errors.rua}
                             helperText={errors.rua ? "Campo obrigatório" : ""}
                             InputLabelProps={{ shrink: true }}
@@ -208,7 +197,6 @@ export const RegisterPlace = () => {
                             type="text"
                             label="Bairro"
                             {...register("bairro")}
-                            // value={address.neighborhood}
                             error={!!errors.bairro}
                             helperText={errors.bairro ? "Campo obrigatório" : ""}
                             InputLabelProps={{ shrink: true }}
@@ -220,7 +208,6 @@ export const RegisterPlace = () => {
                             type="text"
                             label="Cidade"
                             {...register("cidade")}
-                            // value={address.city}
                             error={!!errors.cidade}
                             helperText={errors.cidade ? "Campo obrigatório" : ""}
                             InputLabelProps={{ shrink: true }}
@@ -232,7 +219,6 @@ export const RegisterPlace = () => {
                             type="text"
                             label="Estado"
                             {...register("estado")}
-                            // value={address.state}
                             error={!!errors.estado}
                             helperText={errors.estado ? "Campo obrigatório" : ""}
                             InputLabelProps={{ shrink: true }}
@@ -257,6 +243,17 @@ export const RegisterPlace = () => {
                             {...register("longitude", { required: true })}
                             error={!!errors.longitude}
                             helperText={errors.longitude ? "Campo obrigatório" : ""}
+                            InputLabelProps={{ shrink: true }}
+                        />
+                    </Grid>
+                    <Grid item xs={12} sm={6}>
+                        <TextField
+                            fullWidth
+                            type="text"
+                            label="Imagem URL"
+                            {...register("imagem", { required: true })}
+                            error={!!errors.imagem}
+                            helperText={errors.imagem ? "Campo obrigatório" : ""}
                             InputLabelProps={{ shrink: true }}
                         />
                     </Grid>

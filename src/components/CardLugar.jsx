@@ -38,6 +38,11 @@ export function CardLugar() {
                 <Grid item xs={12} sm={12} md={12} key={place.id}>
                     <div className="card" style={{ padding: '10px', boxShadow: '0 4px 8px rgba(0,0,0,0.1)' }}>
                         <Typography variant="h3">{place.nome}</Typography>
+                        <img
+                            src={place.imagem}
+                            alt="Imagem do lugar"
+                            style={{ maxWidth: '100%', height: 'auto' }}
+                        />
                         <Typography>{place.descricao}</Typography>
                         <Typography variant="subtitle1">Localização</Typography>
                         <Typography component="p">{place.rua} número: {place.numero} , {place.bairro}, {place.cidade} - {place.estado}</Typography>
@@ -52,6 +57,7 @@ export function CardLugar() {
                             <Typography component="p">Nenhuma atividade esportiva listada.</Typography>
                         )}
                         <Typography>Criado pelo usuário: {getUserName(place.id)}</Typography>
+                        {/* Botões de edição e exclusão */}
                         {location.pathname === '/placeList' && (
                             <>
                                 <Link to={`/registerPlace/${place.id}`}>
