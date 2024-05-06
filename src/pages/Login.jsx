@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import Paper from '@mui/material/Paper';
@@ -10,35 +10,25 @@ import IconButton from '@mui/material/IconButton';
 import InputAdornment from '@mui/material/InputAdornment';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
-import Axios from 'axios';
+
+
+import { UsuariosContext } from '../context/UsuariosContext';
 
 export const Login = () => {
     const { register, handleSubmit, formState: { errors } } = useForm();
     const [showPassword, setShowPassword] = useState(false);
+
+    const { login } = useContext(UsuariosContext);
+
 
     const handleClickShowPassword = () => {
         setShowPassword(!showPassword);
     };
 
     const onSubmit = async (data) => {
-        const response = await Axios.get('http://localhost:3000/usuarios');
-        const users = response.data;
-        const user = users.find(u => u.email === data['E-mail'] && u.senha === data['Senha']);
-
-        if (user) {
-            await Axios.put(`http://localhost:3000/usuarios/${user.id}`, {
-                ...user,
-                logado: true,
-
-            });
-            localStorage.setItem("isAutenticado", true)
-            localStorage.setItem("id", user.id)
-            alert('Login efetuado com sucesso!');
-            window.location.href = '/dashboard';
-        } else {
-            alert('Usuário ou senha inválidos!');
-        }
+        await login(data.email, data.senha);
     };
+
 
 
     return (
@@ -55,7 +45,7 @@ export const Login = () => {
                                     fullWidth
                                     type="text"
                                     label="E-mail"
-                                    {...register("E-mail", { required: true })}
+                                    {...register("email", { required: true })}
 
 
                                 />
@@ -65,7 +55,7 @@ export const Login = () => {
                                     fullWidth
                                     type={showPassword ? 'text' : 'password'}
                                     label="Senha"
-                                    {...register("Senha", { required: true })}
+                                    {...register("senha", { required: true })}
                                     InputProps={{
                                         endAdornment: (
                                             <InputAdornment position="end">

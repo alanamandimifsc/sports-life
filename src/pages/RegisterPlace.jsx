@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useContext } from 'react';
 import { useForm } from 'react-hook-form';
 import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
@@ -7,183 +7,86 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
+import { LugaresContext } from '../context/LugaresContex';
 
 export const RegisterPlace = () => {
-
     const { id } = useParams();
-    const [id_place, setIdPlace] = useState(0);
+    const { buscaCep, atualizaLugar } = useContext(LugaresContext);
+    const { register, handleSubmit, formState: { errors }, setValue, reset } = useForm();
 
-    // const history = useHistory();
 
-    const { register, handleSubmit, formState: { errors }, setValue } = useForm();
-
-    const [place, setPlaceData] = useState({
-        nome: '',
-        id_usuario: '',
-        descricao: '',
-        praticas_esportivas: [],
-        rua: '',
-        numero: '',
-        complemento: '',
-        bairro: '',
-        cidade: '',
-        estado: '',
-        latitude: '',
-        longitude: '',
-        cep: ''
-    });
 
     useEffect(() => {
-        axios.get('http://localhost:3000/lugares')
-            .then(response => {
-                const lastPlace = response.data[response.data.length - 1];
-                setIdPlace(lastPlace ? parseInt(lastPlace.id) + 1 : 1);
-            })
-            .catch(error => {
-                console.log('Erro ao obter último ID de lugar:', error);
-            });
-    }, []);
-
-    useEffect(() => {
-
         const fetchPlaceData = async () => {
+
             if (id) {
                 try {
-                    // const response = await axios.get(`http://localhost:3000/lugares`);
-                    const response = await axios.get("http://localhost:3000/lugares/" + id);
-                    // console.log(response.data);
-                    // console.log(response1.data);
-                    // console.log(id);
+                    const response = await axios.get(`http://localhost:3000/lugares/${id}`);
                     const place = response.data;
-                    // const place = response.data.find(place => place.id == id);
-
-                    // Verificar se o lugar foi encontrado
+                    // console.log(place.praticas_esportivas)
                     if (place) {
-                        console.log(place.cep)
-                        console.log(place.latitude)
                         setValue('nome', place.nome);
-                        setValue('id_usuario', place.id_usuario);
+                        setValue('id_usuario', String(place.id_usuario));
                         setValue('descricao', place.descricao);
-                        setValue('praticas_esportivas', place.praticas_esportivas);
                         setValue('rua', place.rua);
-                        setValue('cep', place.cep)
                         setValue('numero', place.numero);
                         setValue('complemento', place.complemento);
+                        setValue('cep', place.cep);
                         setValue('bairro', place.bairro);
                         setValue('cidade', place.cidade);
                         setValue('estado', place.estado);
                         setValue('latitude', place.latitude);
                         setValue('longitude', place.longitude);
-                        setAddress({
-                            street: place.rua || '',
-                            neighborhood: place.bairro || '',
-                            city: place.cidade || '',
-                            state: place.estado || '',
-                            // cep: place.cep
-                        });
+                        if (place.praticas_esportivas && Array.isArray(place.praticas_esportivas)) {
+                            place.praticas_esportivas.forEach(pratica => {
+                                setValue(`praticas_esportivas[${pratica}]`, true);
+
+                            });
+                        }
+                        setValue('imagem', place.imagem);
+                        setValue('id_usuario', localStorage.getItem('id'));
+
                     } else {
                         console.log(`Lugar com ID ${id} não encontrado.`);
                     }
                 } catch (error) {
                     console.log("Erro ao buscar lugares:", error);
                 }
+            } else {
+                reset();
+
             }
+
+            setValue('id_usuario', localStorage.getItem('id'));
+
         };
         fetchPlaceData();
     }, [id]);
 
-    const [address, setAddress] = useState({
-        street: '',
-        neighborhood: '',
-        city: '',
-        state: ''
-    });
 
     const handleBlurCEP = async (cep) => {
-        if (cep.length === 8) {
-            try {
-                const response = await axios.get(`https://viacep.com.br/ws/${cep}/json/`);
-                const data = response.data;
-                setAddress({
-                    street: data.logradouro || '',
-                    neighborhood: data.bairro || '',
-                    city: data.localidade || '',
-                    state: data.uf || ''
+        const dados = await buscaCep(cep);
+        setValue('rua', dados.logradouro);
+        setValue('bairro', dados.bairro);
+        setValue('cidade', dados.localidade);
+        setValue('estado', dados.uf);
 
-                });
-            } catch (error) {
-                console.log("Erro ao buscar CEP:", error);
-            }
-        }
     };
 
     const onSubmit = (data) => {
-        const requestConfig = {
-            method: id ? 'PUT' : 'POST',
-            body: JSON.stringify({
-                id: (id !== undefined ? id : String(id_place)),
-                id_usuario: parseInt(data.id_usuario),
-                nome: data.nome,
-                descricao: data.descricao,
-                cep: data.cep,
-                rua: data.rua,
-                numero: parseInt(data.numero),
-                complemento: data.complemento,
-                bairro: address.neighborhood,
-                cidade: address.city,
-                estado: address.state,
-                latitude: data.latitude,
-                longitude: data.longitude,
-                praticas_esportivas: data.praticas_esportivas
-            }),
-            headers: {
-                'Content-Type': 'application/json'
-            },
-        };
-        console.log(`http://localhost:3000/lugares${id ? `/${id}` : ''}`, requestConfig);
+        console.log(data);
+        atualizaLugar(data);
 
-        fetch(`http://localhost:3000/lugares${id ? `/${id}` : ''}`, requestConfig)
-            .then(response => {
-                console.log(response);
-                if (response.ok) {
-                    setIdPlace(prevId => parseInt(prevId) + 1);
-                    console.log(id_place);
-                    alert('Local cadastrado com sucesso!');
-                } else {
-                    throw new Error('Erro ao cadastrar local.');
-                }
-            })
-            .catch(error => {
-                console.error("Erro ao cadastrar local:", error);
-                alert('Erro ao cadastrar local!');
-            });
-
-
-
-        console.log({
-            Nome: data.nome,
-            "ID do usuário": data.id_usuario,
-            Descrição: data.descricao,
-            PráticasEsportivas: data.praticas_esportivas,
-            Rua: data.rua,
-            Bairro: address.neighborhood,
-            Cidade: address.city,
-            Estado: address.state,
-            Número: data.numero,
-            Complemento: data.complemento,
-            Latitude: data.latitude,
-            Longitude: data.longitude
-        });
     };
 
     return (
         <form onSubmit={handleSubmit(onSubmit)}>
-            <Paper elevation={3} style={{ padding: 20, maxWidth: 500, margin: 'auto' }}>
+            <Paper elevation={3} style={{ padding: 30, maxWidth: 500, margin: 'auto' }}>
                 <Typography variant="h5" component="h1" align="center" gutterBottom>
                     Registrar Local
                 </Typography>
                 <Grid container spacing={2}>
-                    <Grid item xs={12} md={6}>
+                    <Grid item xs={12} md={12}>
                         <TextField
                             fullWidth
                             type="text"
@@ -191,6 +94,7 @@ export const RegisterPlace = () => {
                             {...register("nome", { required: true })}
                             error={!!errors.nome}
                             helperText={errors.nome ? "Campo obrigatório" : ""}
+                            InputLabelProps={{ shrink: true }}
                         />
                     </Grid>
                     <Grid item xs={12} md={6}>
@@ -198,9 +102,11 @@ export const RegisterPlace = () => {
                             fullWidth
                             type="number"
                             label="ID do usuário"
-                            {...register("id_usuario", { required: true, min: 1 })}
+                            {...register("id_usuario")}
                             error={!!errors.id}
                             helperText={errors.id ? "ID inválido" : ""}
+                            InputLabelProps={{ shrink: true }}
+                            disabled
                         />
                     </Grid>
                     <Grid item xs={12}>
@@ -211,6 +117,7 @@ export const RegisterPlace = () => {
                             {...register("descricao", { required: true })}
                             error={!!errors.descricao}
                             helperText={errors.descricao ? "Campo obrigatório" : ""}
+                            InputLabelProps={{ shrink: true }}
                         />
                     </Grid>
                     <Grid item xs={12}>
@@ -219,20 +126,22 @@ export const RegisterPlace = () => {
                             <Grid container spacing={1}>
                                 <Grid item xs={6}>
                                     <div>
-                                        <input type="checkbox" id="caminhada" {...register("praticas_esportivas", { required: true })} value="caminhada" />
+                                        <input type="checkbox" id="Caminhada" {...register("praticas_esportivas.Caminhada")} />
                                         <label htmlFor="caminhada">Caminhada</label><br />
-                                        <input type="checkbox" id="trilha" {...register("praticas_esportivas", { required: true })} value="trilha" />
+                                        <input type="checkbox" id="Trilha" {...register("praticas_esportivas.Trilha")} />
                                         <label htmlFor="trilha">Trilha</label><br />
-                                        <input type="checkbox" id="musculação" {...register("praticas_esportivas", { required: true })} value="musculação" />
-                                        <label htmlFor="musculação">Musculação</label><br />
+                                        <input type="checkbox" id="Musculacao" {...register("praticas_esportivas.Musculacao")} />
+                                        <label htmlFor="musculacao">Musculação</label><br />
                                     </div>
                                 </Grid>
                                 <Grid item xs={6}>
                                     <div>
-                                        <input type="checkbox" id="natação" {...register("praticas_esportivas", { required: true })} value="natação" />
-                                        <label htmlFor="natação">Natação</label><br />
-                                        <input type="checkbox" id="surf" {...register("praticas_esportivas", { required: true })} value="surf" />
+                                        <input type="checkbox" id="Natacao" {...register("praticas_esportivas.Natacao")} />
+                                        <label htmlFor="natacao">Natação</label><br />
+                                        <input type="checkbox" id="surf" {...register("praticas_esportivas.Surf")} />
                                         <label htmlFor="surf">Surf</label><br />
+                                        <input type="checkbox" id="Futebol" {...register("praticas_esportivas.Futebol")} />
+                                        <label htmlFor="futebol">Futebol</label><br />
                                     </div>
                                 </Grid>
                             </Grid>
@@ -244,9 +153,11 @@ export const RegisterPlace = () => {
                             fullWidth
                             type="text"
                             label="CEP"
+                            name='cep'
                             {...register("cep", { onBlur: (e) => handleBlurCEP(e.target.value) })}
                             error={!!errors.CEP}
                             helperText={errors.CEP ? "CEP inválido" : ""}
+                            InputLabelProps={{ shrink: true }}
                         />
                     </Grid>
                     <Grid item xs={12} sm={6}>
@@ -255,9 +166,9 @@ export const RegisterPlace = () => {
                             type="text"
                             label="Rua"
                             {...register("rua")}
-                            value={address.street}
                             error={!!errors.rua}
                             helperText={errors.rua ? "Campo obrigatório" : ""}
+                            InputLabelProps={{ shrink: true }}
                         />
                     </Grid>
                     <Grid item xs={12} sm={6}>
@@ -268,6 +179,7 @@ export const RegisterPlace = () => {
                             {...register("numero", { required: true, maxLength: 5 })}
                             error={!!errors.numero}
                             helperText={errors.numero ? "Número inválido" : ""}
+                            InputLabelProps={{ shrink: true }}
                         />
                     </Grid>
                     <Grid item xs={12} sm={6}>
@@ -278,6 +190,7 @@ export const RegisterPlace = () => {
                             {...register("complemento", { required: true })}
                             error={!!errors.complemento}
                             helperText={errors.complemento ? "Campo obrigatório" : ""}
+                            InputLabelProps={{ shrink: true }}
                         />
                     </Grid>
                     <Grid item xs={12} sm={6}>
@@ -286,9 +199,9 @@ export const RegisterPlace = () => {
                             type="text"
                             label="Bairro"
                             {...register("bairro")}
-                            value={address.neighborhood}
                             error={!!errors.bairro}
                             helperText={errors.bairro ? "Campo obrigatório" : ""}
+                            InputLabelProps={{ shrink: true }}
                         />
                     </Grid>
                     <Grid item xs={12} sm={6}>
@@ -297,9 +210,9 @@ export const RegisterPlace = () => {
                             type="text"
                             label="Cidade"
                             {...register("cidade")}
-                            value={address.city}
                             error={!!errors.cidade}
                             helperText={errors.cidade ? "Campo obrigatório" : ""}
+                            InputLabelProps={{ shrink: true }}
                         />
                     </Grid>
                     <Grid item xs={12} sm={6}>
@@ -308,9 +221,9 @@ export const RegisterPlace = () => {
                             type="text"
                             label="Estado"
                             {...register("estado")}
-                            value={address.state}
                             error={!!errors.estado}
                             helperText={errors.estado ? "Campo obrigatório" : ""}
+                            InputLabelProps={{ shrink: true }}
                         />
                     </Grid>
                     <Grid item xs={12} sm={6}>
@@ -321,6 +234,7 @@ export const RegisterPlace = () => {
                             {...register("latitude", { required: true })}
                             error={!!errors.latitude}
                             helperText={errors.latitude ? "Campo obrigatório" : ""}
+                            InputLabelProps={{ shrink: true }}
                         />
                     </Grid>
                     <Grid item xs={12} sm={6}>
@@ -331,6 +245,18 @@ export const RegisterPlace = () => {
                             {...register("longitude", { required: true })}
                             error={!!errors.longitude}
                             helperText={errors.longitude ? "Campo obrigatório" : ""}
+                            InputLabelProps={{ shrink: true }}
+                        />
+                    </Grid>
+                    <Grid item xs={12} sm={6}>
+                        <TextField
+                            fullWidth
+                            type="text"
+                            label="Imagem URL"
+                            {...register("imagem", { required: true })}
+                            error={!!errors.imagem}
+                            helperText={errors.imagem ? "Campo obrigatório" : ""}
+                            InputLabelProps={{ shrink: true }}
                         />
                     </Grid>
                     <Grid item xs={12}>

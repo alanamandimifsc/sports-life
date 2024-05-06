@@ -14,7 +14,7 @@
       "bairro": "Bangu",
       "cidade": "Rio de Janeiro",
       "estado": "RJ",
-      "logado": true
+      "logado": false
     },
     {
       "id": "2",
@@ -78,34 +78,18 @@
       "bairro": "Centro",
       "cidade": "Joinville",
       "estado": "SC",
-      "logado": "false"
-    },
-    {
-      "id": "6",
-      "nome": "alana",
-      "email": "alana@gmail.com",
-      "cpf": "10637225783",
-      "data_nasc": "2024-04-03",
-      "sexo": "Feminino",
-      "senha": "12345",
-      "cep": "88049015",
-      "rua": "Avenida Blumenau",
-      "numero": null,
-      "bairro": "Tapera",
-      "cidade": "Florianópolis",
-      "estado": "SC",
       "logado": true
     }
   ],
   "lugares": [
     {
       "id": "1",
-      "id_usuario": 1,
-      "nome": "Praça da Bandeira 1",
+      "id_usuario": "1",
+      "nome": "Praça da Bandeira",
       "descricao": "Praça da Bandeira é um bairro da Zona Central do município do Rio de Janeiro, no Brasil. O bairro é cortado pela Rua Mariz e Barros, uma das principais vias de acesso ao Centro do Rio de Janeiro. O bairro é conhecido por abrigar o Estádio de São Januário, sede do Club de Regatas Vasco da Gama, e o Hospital Universitário Gaffrée e Guinle, da Universidade Federal do Estado do Rio de Janeiro.",
-      "cep": "20270-000",
+      "cep": "20270-004",
       "rua": "Rua Barão de Iguatemi",
-      "numero": 35,
+      "numero": 3,
       "complemento": "Casa 1",
       "bairro": "Praça da Bandeira",
       "cidade": "Rio de Janeiro",
@@ -113,13 +97,14 @@
       "latitude": "-22.9203",
       "longitude": "-43.1917",
       "praticas_esportivas": [
-        "caminhada",
-        "trilha"
-      ]
+        "Caminhada",
+        "Trilha"
+      ],
+      "imagem": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRQYaUtU0CkeUNoEoydJn3LUmlXeq3HcggkSOpD7Mx7XQ&s"
     },
     {
       "id": "2",
-      "id_usuario": 1,
+      "id_usuario": "1",
       "nome": "Praia do Campeche",
       "descricao": "A Praia do Campeche é uma praia brasileira localizada no município de Florianópolis, no estado de Santa Catarina. É uma das praias mais conhecidas da Ilha de Santa Catarina, sendo muito frequentada por turistas e moradores locais. A praia é conhecida por suas águas cristalinas e pela extensa faixa de areia branca.",
       "cep": "88063-000",
@@ -132,30 +117,94 @@
       "latitude": "-27.6792",
       "longitude": "-48.4883",
       "praticas_esportivas": [
-        "caminhada",
-        "corrida",
-        "natação",
-        "surf"
-      ]
+        "Caminhada",
+        "Corrida",
+        "Natação",
+        "Surf"
+      ],
+      "imagem": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR1jAqKie8pOnkK2NgfFHExbkLduakRAyRT-w&s"
     },
     {
       "id": "3",
-      "id_usuario": 2,
-      "nome": "Praia",
-      "descricao": "Praia too do sul da ilha",
-      "cep": "88049015",
-      "rua": "Avenida Blumenau",
-      "numero": 34,
-      "complemento": "s/",
-      "bairro": "Tapera",
+      "id_usuario": "1",
+      "nome": "Parque Estadual da Serra do Tabuleiro",
+      "descricao": "O Parque Estadual da Serra do Tabuleiro é uma unidade de conservação de proteção integral localizada no estado de Santa Catarina, no Brasil. O parque é conhecido por abrigar uma grande diversidade de espécies de fauna e flora, incluindo algumas espécies ameaçadas de extinção. O parque é uma ótima opção para quem gosta de ecoturismo e de contato com a natureza.",
+      "cep": "88139-000",
+      "rua": "Rodovia SC-410",
+      "numero": 0,
+      "complemento": "Km 0",
+      "bairro": "Sertão do Trombudo",
+      "cidade": "Palhoça",
+      "estado": "SC",
+      "latitude": "-27.8775",
+      "longitude": "-48.7817",
+      "praticas_esportivas": [
+        "Caminhada",
+        "Trilha",
+        "Ciclismo"
+      ],
+      "imagem": "https://static.wixstatic.com/media/9bad76_af1db01f634043c6939ad09855273747~mv2.jpg/v1/fill/w_250,h_167,al_c,q_90,enc_auto/9bad76_af1db01f634043c6939ad09855273747~mv2.jpg"
+    },
+    {
+      "id": "4",
+      "id_usuario": "1",
+      "nome": "Parque Estadual do Rio Vermelho",
+      "descricao": "O Parque Estadual do Rio Vermelho é uma unidade de conservação de proteção integral localizada no estado de Santa Catarina, no Brasil. O parque é conhecido por abrigar uma grande diversidade de espécies de fauna e flora, incluindo algumas espécies ameaçadas de extinção. O parque é uma ótima opção para quem gosta de ecoturismo e de contato com a natureza.",
+      "cep": "88058-000",
+      "rua": "Rodovia João Gualberto Soares",
+      "numero": 0,
+      "complemento": "Km 0",
+      "bairro": "Rio Vermelho",
       "cidade": "Florianópolis",
       "estado": "SC",
-      "latitude": "-27.586932",
-      "longitude": "-48.63371575049416",
+      "latitude": "-27.5325",
+      "longitude": "-48.4217",
       "praticas_esportivas": [
-        "caminhada",
-        "trilha"
-      ]
+        "Caminhada",
+        "Trilha",
+        "Ciclismo"
+      ],
+      "imagem": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQy4raZzleINAcYk1DYPLhxXh4vSiM-1m9UoA&s"
+    },
+    {
+      "id": "5",
+      "id_usuario": "3",
+      "nome": "Jardim Botânico do Rio de Janeiro",
+      "descricao": "O Jardim Botânico do Rio de Janeiro é um jardim botânico localizado no bairro do Jardim Botânico, na Zona Sul do município do Rio de Janeiro, no Brasil. O jardim botânico é uma das principais atrações turísticas da cidade, sendo muito visitado por turistas e moradores locais. O jardim botânico é conhecido por abrigar uma grande diversidade de espécies de plantas, incluindo algumas espécies raras e ameaçadas de extinção.",
+      "cep": "22460-030",
+      "rua": "Rua Jardim Botânico",
+      "numero": 1008,
+      "complemento": "Casa 1",
+      "bairro": "Jardim Botânico",
+      "cidade": "Rio de Janeiro",
+      "estado": "RJ",
+      "latitude": "-22.9683",
+      "longitude": "-43.2250",
+      "praticas_esportivas": [
+        "Caminhada",
+        "Trilha",
+        "Ciclismo"
+      ],
+      "imagem": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS42m26zjQmOOhW0UyFa78xo3TtMXDD8Suylg&s"
+    },
+    {
+      "id": "6",
+      "id_usuario": "5",
+      "nome": "Praia do Morro das Pedras",
+      "descricao": "Praia top do sul da Ilha repleta de muita onda para os amantes do surf!",
+      "cep": "88066220",
+      "rua": "Servidão Morro das Pedras",
+      "numero": 1,
+      "complemento": "s/",
+      "bairro": "Morro das Pedras",
+      "cidade": "Florianópolis",
+      "estado": "SC",
+      "latitude": "-27.68601",
+      "longitude": "-48.56472",
+      "praticas_esportivas": [
+        "Caminhada"
+      ],
+      "imagem": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRFeh38cxY9XCpGrjImCy0wk_8kU3qNkQGCPw&s"
     }
   ]
 }
