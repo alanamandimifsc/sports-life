@@ -159,7 +159,7 @@ const CardUsuarios = () => {
                 </Grid>
                 {/* Lugares */}
                 <Grid item xs={12} sm={6} md={4}>
-                    <Typography variant="h4">Lugares</Typography>
+                    <Typography variant="h4">Tipos de Exercicios</Typography>
                     <canvas id="tiposExerciciosChart" style={{ width: '100%', height: 'auto', marginTop: '20px' }}></canvas>
                 </Grid>
                 {/* Mapa */}
